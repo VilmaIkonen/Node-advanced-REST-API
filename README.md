@@ -1,1 +1,2 @@
-# Node advanced / REST API classes at Business College Helsinki spring 2021
+# Node advanced / REST API 
+- Business College Helsinki spring 2021
