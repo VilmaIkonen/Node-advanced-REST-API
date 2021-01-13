@@ -10,10 +10,11 @@ function createDataStorage(baseDir, config) {
   const { getAllFromStorage, getFromStorage } = initLayerFunctions(baseDir, config.storage);
   
   class Datastorage {
-    // getter:
+    // getter (Example of using getter in testClass.js):
     get CODES() {
       return CODES;
     }
+
     // methods:
     getAll() {
       return getAllFromStorage();
