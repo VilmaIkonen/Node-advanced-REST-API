@@ -19,18 +19,18 @@ function createDataStorage(baseDir, config) {
     getAll() {
       return getAllFromStorage();
     }
-    get(id) {
+    get(key, value) {
       return new Promise(async (resolve, reject) => {
-        if(!id) {
-          reject(MESSAGES.NOT_FOUND('<empty Id>'));
+        if(!value) {
+          reject(MESSAGES.NOT_FOUND(`<empty ${key}>`));
         }
         else {
-          const result = await getFromStorage('bookID', id);
+          const result = await getFromStorage(key, value);
           if(result) {
             resolve(result);
           }
           else {
-            reject(MESSAGES.NOT_FOUND(id));
+            reject(MESSAGES.NOT_FOUND(value));
           }
         }
       })
