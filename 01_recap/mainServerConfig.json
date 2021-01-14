@@ -1,5 +1,0 @@
-{
-  "port": 4000,
-  "host": "localhost",
-  "activeStorage": "serverConfigJson.json"
-}
