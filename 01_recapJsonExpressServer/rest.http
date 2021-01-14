@@ -1,0 +1,9 @@
+http://localhost:4000/api/books/6
+
+###
+Send request
+GET http://localhost:4000/api/books HTTP/1.1
+
+###
+Send request
+OPTIONS http://localhost:4000/api/books HTTP/1.1

@@ -1,0 +1,4 @@
+{
+  "storageFile":"books.json",
+  "readerWriter":"jsonReaderWriter.js"
+}
