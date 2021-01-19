@@ -1,12 +1,12 @@
-# Project book server
+# project book server
 
-## Create project folder
+## create project folder
 
-## Create package.json file
--npm init -y
+##  create package.json
+    -   npm init -y
 
-## Install all dependencies
--npm install express cors
+## install all dependencies
+    - express and cors
 
-## Create jsonStorage folder
--books.json file
+## create jsonStorage-folder
+    -   books.json

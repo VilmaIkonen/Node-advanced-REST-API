@@ -1,0 +1,51 @@
+[
+    {
+        "bookID": 6,
+        "name":"Rebellion of Sophie Q. Lister",
+        "author":"Emily White",
+        "numberOfBooks": 15,
+        "year": 2005
+    },
+    {
+        "bookID": 7,
+        "name":"Maria and My",
+        "author":"Isla Shore",
+        "numberOfBooks": 150,
+        "year": 2018
+    },
+    {
+        "bookID": 1,
+        "name":"Hacking databases",
+        "author":"Jesse River",
+        "numberOfBooks": 25,
+        "year": 2012
+    },
+    {
+        "bookID": 5,
+        "name":"Databases - The rise and fall",
+        "author":"Layla Jones",
+        "numberOfBooks": 20,
+        "year": 2011
+    },
+    {
+        "bookID": 3,
+        "name":"NoSql - New Hope",
+        "author":"Felix Harris",
+        "numberOfBooks": 5,
+        "year": 2000
+    },
+    {
+        "bookID": 4,
+        "name":"The adventures of Mike the Millipede",
+        "author":"Antony Lee",
+        "numberOfBooks": 100,
+        "year": 2015
+    },
+    {
+        "bookID": 2,
+        "name":"SQL-mysteries",
+        "author":"Matt Wilson",
+        "numberOfBooks": 10,
+        "year": 1995
+    }
+]
