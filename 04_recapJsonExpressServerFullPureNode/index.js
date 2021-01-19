@@ -2,53 +2,125 @@
 
 const http = require('http');
 const path = require('path');
-const express = require('express');
-const cors = require('cors');
+const url = require('url');
 
-const app = express();
-
-const {port, host, activeStorage} = require('./mainServerConfig.json');
+const { port, host, activeStorage } = require('./mainServerConfig.json');
 const baseDir = __dirname;
 
-const {storage, storageLibraries} = require(path.join(baseDir,activeStorage));
+const { storage, storageLibraries } = require(path.join(baseDir,activeStorage));
 const {createDataStorage} = 
-    require(path.join(baseDir, storageLibraries.folder,storageLibraries.dataLayer));
+	require(path.join(baseDir, storageLibraries.folder,storageLibraries.dataLayer));
     
 const { resource, key } = require(path.join(baseDir,storage.folder,storage.storageConfig));
 const dataStorage = createDataStorage(baseDir, {storage, storageLibraries});
 
-const server = http.createServer(app);
+const server = http.createServer(async(req, res) => {
+	const route = decodeURIComponent(url.parse(req.url).pathname);
 
-app.use(express.json());
-app.use(cors());
+	try {
+		const method = req.method.toUpperCase();
 
-app.get(resource, (req,res)=> dataStorage.getAll().then(result=>res.json(result)));
+		if(method === 'OPTIONS') {
+			sendOptionsResponse(res);
+		}
+		else if(route === resource) {
+			if(method === 'GET') { // works
+				const result = await dataStorage.getAll();
+				sendJson(res, result);
+			}
+			else if(method === 'POST') { // works
+				try {
+					const resultPost = await getJson(req);
+					const queryResultPost = await dataStorage.insert(key, resultPost);
+					sendJson(res, queryResultPost);
+				}
+				catch(err) {
+					sendJson(res, err, 404);
+				}
+			}
+		}
+		else if(route.startsWith(`${resource}/`)) {
+			const pathParts = route.split('/');
+			// console.log(pathParts); --> [ '', 'api', 'books', '1' ]
+			
+			if(pathParts.length > 3 && pathParts[3].length > 0) { // hardcoding is not a good thing...
+				const value =+ pathParts[3]; // --> 'books'
 
-app.route(`${resource}/:value`)
-    .get((req,res)=>{
-        const value = req.params.value;
-        dataStorage.get(key,value)
-            .then(resource=>res.json(resource))
-            .catch(error => res.json(error));
-    })
-    .delete((req,res)=>{
-        const value = req.params.value;
-        dataStorage.remove(key,value)
-            .then(status => res.json(status))
-            .catch(error => res.json(error));
-    })
-    .put((req,res)=>{
-        if(!req.body) return res.sendStatus(500);
-        const value=req.params.value;
-        dataStorage.update(key,value,req.body)
-            .then(status=>res.json(status))
-            .catch(error=>res.json(error));
-    });
+				switch(method) {
+					case 'GET': // works
+						const resultGet = await dataStorage.get(key, value);
+						sendJson(res, resultGet);
+						break;
+					
+					case 'DELETE': // works
+						const resultDelete = await dataStorage.remove(key, value);
+						sendJson(res, resultDelete);
+						break;
+					
+					case 'PUT': // works??
+						try {
+							const resultPut = await getJson(req);
+							const queryResultPut = await dataStorage.update(key, value, resultPut);
+							sendJson(res, queryResultPut);
+						} 
+						catch (err) {
+							sendJson(res, err, 404);									
+						}
+						break;
 
-app.post(resource, (req,res) =>{
-    if(!req.body) return res.sendStatus(500);
-    dataStorage.insert(key,req.body)
-        .then(status=>res.json(status))
-        .catch(error=>res.json(error));
+					default:	
+						sendJson(res, {message: 'Method not in use'}, 405);
+				}
+			}
+			else {
+				sendJson(res, {message: `${key} missing`})
+			}
+		}
+		else {
+			sendJson(res, error, 404); // if some non-existing route is given
+		}
+	} 
+	catch (error) {		
+		sendJson(res, { message: error.message}, 404);			
+	}
 });
+
 server.listen(port,host, ()=>console.log(`Server ${host} is serving at port ${port}`));
+
+// ALL FUNCTIONS below could be added also in library section:
+
+function sendOptionsResponse(res, statusCode = 200) {
+	res.statusCode = statusCode;
+	res.setHeader('X-Powered-By', 'Pure Node');
+	res.setHeader('Access-Control-Allow-Origin', '*'); // Access from anywhere
+	res.setHeader('Access-Control-Allow-Methods', '*'); // All methods allowed
+	res.setHeader('Access-Control-Allow-Headers', 'Origin, Accept, Content-Type');
+	res.setHeader('Content-Length', 0); // As body is not going back, only headers --> length = 0
+	res.end();
+};
+
+function sendJson(res, jsonResource, statusCode = 200) {
+	const jsonData = JSON.stringify(jsonResource);
+	const jsonLength = Buffer.byteLength(jsonData, 'utf8');
+	res.statusCode = statusCode;
+	res.setHeader('X-Powered-By', 'Pure Node');
+	res.setHeader('Content-Type', 'application/json');
+	res.setHeader('Content-Length', jsonLength);
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.end(jsonData);
+};
+
+function getJson(req) {
+	return new Promise((resolve, reject) => {
+		if(req.headers['content-type'] !== 'application/json') {
+			reject('Wrong Content-Type');
+		}
+		else {
+			const databuffer = [];
+			// Request handling in Node:
+			req.on('data', messageFragment => databuffer.push(messageFragment));
+			req.on('end', () => resolve(JSON.parse(Buffer.concat(databuffer).toString())));
+			req.on('error', () => reject('Error during the data transfer'));
+		}
+	})
+}

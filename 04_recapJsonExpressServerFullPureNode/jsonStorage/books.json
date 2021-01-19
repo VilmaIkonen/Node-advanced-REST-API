@@ -7,13 +7,6 @@
         "year": 2018
     },
     {
-        "bookID": 5,
-        "name": "Databases - The rise and fall",
-        "author": "Layla Jones",
-        "numberOfBooks": 20,
-        "year": 2011
-    },
-    {
         "bookID": 3,
         "name": "NoSql - New Hope",
         "author": "Felix Harris",
@@ -35,10 +28,10 @@
         "year": 1995
     },
     {
-        "bookID": 1,
-        "name": "Hacking databases",
-        "author": "Jesse River",
-        "numberOfBooks": 25,
-        "year": 2012
+        "bookID": 5,
+        "name": "Databases - The rise and fall",
+        "author": "Layla Jones",
+        "numberOfBooks": 20,
+        "year": 2011
     }
 ]
