@@ -2,5 +2,5 @@
   "readerWriter": "jsonReaderWriter.js",
   "storageFile": "books.json",
   "resource": "/api/books",
-  "key": "bookId"
+  "key": "bookID"
 }

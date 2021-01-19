@@ -1,9 +1,9 @@
 [
     {
         "employeeId": 2,
-        "firstname": "  Matt  ",
-        "lastname": "  River  ",
-        "department": " HR ",
+        "firstname": "Matt",
+        "lastname": "River",
+        "department": "HR",
         "salary": 3450
     },
     {
@@ -22,7 +22,7 @@
     },
     {
         "employeeId": 45,
-        "firstname": "   Mrs",
+        "firstname": "Mrs",
         "lastname": "Bay",
         "department": "GM",
         "salary": 3400

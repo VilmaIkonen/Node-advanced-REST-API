@@ -1,14 +1,14 @@
 'use strict';
 
-const { get } = require('http');
 const path = require('path');
 
 function createDataStorage(baseDir, config) {
-  const libPath = path.join(baseDir, config.storageLibraries.folder);
-  const { CODES, MESSAGES } = require(path.join(libPath, config.storageLibraries.errorCodes));
-  const { initLayerFunctions } = require(path.join(libPath, config.storageLibraries.initLayerFunctions));
-  const { getAllFromStorage, getFromStorage, deleteFromStorage } = initLayerFunctions(baseDir, config.storage);
   
+  const libPath = path.join(baseDir, config.storageLibraries.folder);
+  const {CODES, MESSAGES} = require(path.join(libPath, config.storageLibraries.errorCodes));
+  const {initLayerFunctions} = require(path.join(libPath, config.storageLibraries.layerFunctions));
+  const {getAllFromStorage, getFromStorage, deleteFromStorage} = initLayerFunctions(baseDir, config.storage);
+    
   class Datastorage {
     // getter (Example of using getter in testClass.js):
     get CODES() {

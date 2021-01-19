@@ -1,5 +1,3 @@
-'use strict';
-
 const http = require('http');
 const path = require('path');
 const express = require('express');
@@ -10,16 +8,17 @@ const app = express();
 const {port, host, activeStorage} = require('./mainServerConfig.json');
 const baseDir = __dirname;
 
-const {storage, storageLibraries} = require(path.join(baseDir, activeStorage));
-const {createDataStorage} = require(path.join(baseDir, storageLibraries.folder, storageLibraries.dataLayer));
-const {resource, key} = require(path.join(baseDir, storage.folder,storage.storageConfig));
-
+const {storage, storageLibraries} = require(path.join(baseDir,activeStorage));
+const {createDataStorage} = 
+    require(path.join(baseDir, storageLibraries.folder,storageLibraries.dataLayer));
+    
+const { resource, key } = require(path.join(baseDir,storage.folder,storage.storageConfig));
 const dataStorage = createDataStorage(baseDir, {storage, storageLibraries});
 
 const server = http.createServer(app);
 
 app.use(express.json());
-app.use(cors()); // webpage and api are launched from different origins, cross origin resource sharing needed
+app.use(cors());// webpage and api are launched from different origins, cross origin resource sharing needed
 
 // get all books
 app.get(resource, (req, res) => dataStorage.getAll().then(result => res.json(result)));
