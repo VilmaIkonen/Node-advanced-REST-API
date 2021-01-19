@@ -17,24 +17,45 @@ const dataStorage = createDataStorage(baseDir, {storage, storageLibraries});
 
 const server = http.createServer(app);
 
-app.use(express.json());
+app.use(express.json()); // middleware for json
 app.use(cors());// webpage and api are launched from different origins, cross origin resource sharing needed
 
-// get all books
-app.get(resource, (req, res) => dataStorage.getAll().then(result => res.json(result)));
+// Get all 
+app.get(resource, (req, res) => dataStorage.getAll()
+  .then(result => res.json(result)));
 
 app.route(`${resource}/:value`)
   .get((req, res) => {
-    const value = req.params.id;
+    const value = req.params.value;
+
     dataStorage.get(key, value)
-      .then(book => res.json(book))
+      .then(resource => res.json(resource))
       .catch(error => res.json(error));
-}).delete((req, res) => {
+  })
+  .delete((req, res) => {
+    const value = req.params.value;
+
+    dataStorage.remove(key, value)
+      .then(status => res.json(status))
+      .catch(error => res.json(error));
+  })
+  .put((req, res) => {
+    if(!req.body) return res.sendStatus(500);
+    const value = req.params.value;
+
+    dataStorage.insert(key, req.body)
+      .then(status => res.json(status))
+      .catch(error => res.json(error));
+});
+
+app.post(resource, (req, res) => {
+  if(!req.body) return res.sendStatus(500);
   const value = req.params.value;
-  dataStorage.remove(key, value)
-    .then(status => res.json(status))
-    .catch(error => res.json(error));
-})
+
+  dataStorage.update(key, value, req.body)
+    .then(status => res.json(status)).catch(error => res.json(error));
+
+});
+
 
 server.listen(port, host, () => console.log(`Server ${host} is running in port ${port}`));
-

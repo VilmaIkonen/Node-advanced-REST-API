@@ -1,13 +1,14 @@
 'use strict';
 
+const {resolve} = require('path');
 const path = require('path');
 
 function createDataStorage(baseDir, config) {
   
   const libPath = path.join(baseDir, config.storageLibraries.folder);
-  const {CODES, MESSAGES} = require(path.join(libPath, config.storageLibraries.errorCodes));
+  const { CODES, MESSAGES } = require(path.join(libPath, config.storageLibraries.errorCodes));
   const {initLayerFunctions} = require(path.join(libPath, config.storageLibraries.layerFunctions));
-  const {getAllFromStorage, getFromStorage, deleteFromStorage} = initLayerFunctions(baseDir, config.storage);
+  const { getAllFromStorage, getFromStorage, deleteFromStorage, addToStorage, updateStorage } = initLayerFunctions(baseDir, config.storage);
     
   class Datastorage {
     // getter (Example of using getter in testClass.js):
@@ -52,6 +53,42 @@ function createDataStorage(baseDir, config) {
           }
         }
       })
+    }
+
+    insert (key, resource) {
+      return new Promise(async(resolve, reject) => {
+        if(key == undefined || resource == undefined) {
+          reject(MESSAGES.PROGRAM_ERROR());
+        }
+        else if (await addToStorage(resource)){
+          resolve(MESSAGES.INSERT_OK(key, resource[key]));
+        }
+        else {
+          reject(MESSAGES.NOT_INSERTED());
+        }
+      })
+    }
+
+    update (key, value, resource) {
+      return new Promise(async(resolve, reject) => {
+        if(key == undefined || value == undefined || resource == undefined) {
+          reject(MESSAGES.PROGRAM_ERROR());
+        }
+        else if (await getFromStorage(key, value)) {
+          if(await updateStorage(key, resource)) {
+            resolve(MESSAGES.UPDATE_OK(key, value));
+          }
+          else {
+            reject(MESSAGES.NOT_UPDATED());
+          }
+        }
+        else if (await addToStorage(resource)) {
+          resolve(MESSAGES.INSERT_OK(key, value))
+        }
+        else {
+          reject(MESSAGES.NOT_INSERTED());
+        }
+      });
     }
   }
   // end of class

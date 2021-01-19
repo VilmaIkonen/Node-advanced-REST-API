@@ -26,7 +26,24 @@ function initLayerFunctions(baseDir, config) {
     return await writeStorage(storageFile, storage);
   }
 
-  return { getAllFromStorage, getFromStorage, deleteFromStorage };
+  async function addToStorage(resource) {
+    const storage = await readStorage(storageFile);
+    storage.push(resource);
+    return await writeStorage(storageFile, storage);
+  }
+ 
+  async function updateStorage(key, resource) {  // key = eg. id, resource 0 object to update
+    let storage = await readStorage(storageFile);
+    const oldResource = storage.find(old => old[key] === resource[key]);
+
+    if(oldResource) {
+      Object.assign(oldResource, resource); // updating old object
+      return await writeStorage(storageFile, storage);
+    }
+    return false;
+  }
+
+  return { getAllFromStorage, getFromStorage, deleteFromStorage, addToStorage, updateStorage };
 };
 
 // end of init function
