@@ -24,11 +24,11 @@ const server = http.createServer(async(req, res) => {
 			sendOptionsResponse(res);
 		}
 		else if(route === resource) {
-			if(method === 'GET') { // works
+			if(method === 'GET') { 
 				const result = await dataStorage.getAll();
 				sendJson(res, result);
 			}
-			else if(method === 'POST') { // works
+			else if(method === 'POST') { 
 				try {
 					const resultPost = await getJson(req);
 					const queryResultPost = await dataStorage.insert(key, resultPost);
@@ -47,17 +47,17 @@ const server = http.createServer(async(req, res) => {
 				const value =+ pathParts[3]; // --> 'books'
 
 				switch(method) {
-					case 'GET': // works
+					case 'GET': 
 						const resultGet = await dataStorage.get(key, value);
 						sendJson(res, resultGet);
 						break;
 					
-					case 'DELETE': // works
+					case 'DELETE': 
 						const resultDelete = await dataStorage.remove(key, value);
 						sendJson(res, resultDelete);
 						break;
 					
-					case 'PUT': // works??
+					case 'PUT': 
 						try {
 							const resultPut = await getJson(req);
 							const queryResultPut = await dataStorage.update(key, value, resultPut);

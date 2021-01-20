@@ -1,5 +1,5 @@
 {
-  "name": "recapJsonExpressServerPureNode",
+  "name": "recapJsonServerPureNode",
   "version": "1.0.0",
   "description": "server to serve book data",
   "main": "index.js",

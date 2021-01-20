@@ -1,5 +1,5 @@
 {
-  "name": "recapJsonExpressServer",
+  "name": "03_task",
   "version": "1.0.0",
   "description": "server to serve book data",
   "main": "index.js",
