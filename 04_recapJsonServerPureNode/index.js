@@ -101,7 +101,7 @@ function sendOptionsResponse(res, statusCode = 200) {
 
 function sendJson(res, jsonResource, statusCode = 200) {
 	const jsonData = JSON.stringify(jsonResource);
-	const jsonLength = Buffer.byteLength(jsonData, 'utf8');
+	const jsonLength = Buffer.byteLength(jsonData, 'utf8'); // Buffer class is used to store the coming data, bytelength(method of Buffer) takes utf8 encoding into account
 	res.statusCode = statusCode;
 	res.setHeader('X-Powered-By', 'Pure Node');
 	res.setHeader('Content-Type', 'application/json');

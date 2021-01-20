@@ -33,12 +33,5 @@
         "author": "Layla Jones",
         "numberOfBooks": 20,
         "year": 2011
-    },
-    {
-        "bookID": 44,
-        "name": "The adventures of Mike the Millipede",
-        "author": "Antonyxx Lee",
-        "numberOfBooks": 100,
-        "year": 2015
     }
 ]
