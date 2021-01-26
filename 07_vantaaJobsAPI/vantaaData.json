@@ -1,0 +1,42 @@
+[
+  {
+    "ammattiala": "kaikki",
+    "lukumäärä": "101",
+    "linkki": "http://gis.vantaa.fi/rest/tyopaikat/v1/kaikki"
+  },
+  {
+    "ammattiala": "Opetusala",
+    "lukumäärä": "20",
+    "linkki": "http://gis.vantaa.fi/rest/tyopaikat/v1/Opetusala"
+  },
+  {
+    "ammattiala": "Kotihoito ja erityisasuminen",
+    "lukumäärä": "17",
+    "linkki": "http://gis.vantaa.fi/rest/tyopaikat/v1/Kotihoito ja erityisasuminen"
+  },
+  {
+    "ammattiala": "Terveyden- ja sairaanhoito",
+    "lukumäärä": "16",
+    "linkki": "http://gis.vantaa.fi/rest/tyopaikat/v1/Terveyden- ja sairaanhoito"
+  },
+  {
+    "ammattiala": "Sosiaaliala",
+    "lukumäärä": "16",
+    "linkki": "http://gis.vantaa.fi/rest/tyopaikat/v1/Sosiaaliala"
+  },
+  {
+    "ammattiala": "Varhaiskasvatus",
+    "lukumäärä": "16",
+    "linkki": "http://gis.vantaa.fi/rest/tyopaikat/v1/Varhaiskasvatus"
+  },
+  {
+    "ammattiala": "Hallinto-, esimies- ja asiantuntijatyö",
+    "lukumäärä": "12",
+    "linkki": "http://gis.vantaa.fi/rest/tyopaikat/v1/Hallinto-, esimies- ja asiantuntijatyö"
+  },
+  {
+    "ammattiala": "Tekninen ala",
+    "lukumäärä": "4",
+    "linkki": "http://gis.vantaa.fi/rest/tyopaikat/v1/Tekninen ala"
+  }
+]

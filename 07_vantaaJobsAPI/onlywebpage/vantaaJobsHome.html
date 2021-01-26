@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vantaa Jobs</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+    footer {
+      font: 10px;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+      fetch('http://gis.vantaa.fi/rest/tyopaikat/v1') // after changing the local json data file ('/json') to API origin --> no need for index.js and vantaaData.json
+      .then(result => result.json())
+      .then(data => drawAllBars(data))
+      .catch(err => console.log(err));
+    }
+
+    function drawAllBars(data) {
+      let drawingCanvas = document.getElementById('drawingcanvas');
+      let ctx = drawingCanvas.getContext('2d');
+
+      ctx.translate(10, 150);
+      ctx.fillStyle = 'teal';
+      ctx.scale(1.2, 1.2);
+      
+      // if let=0 --> the total bar is also included
+      for(let i = 1, x = 10; i < data.length; i++, x += 30) {
+        drawBar(ctx, x, data[i]);
+      }
+    }
+
+    function drawBar(ctx, x, data) {
+      ctx.fillRect(x, -data.lukumäärä, 20, data.lukumäärä);
+      ctx.save();
+        ctx.fillStyle = 'black';
+        ctx.fillText(data.lukumäärä, x+5, -data.lukumäärä-5);
+        ctx.rotate(Math.PI/2); // rotate 90 deg.
+        ctx.fillText(data.ammattiala, 5, -x-5);
+
+      ctx.restore();
+    }
+  </script>
+</head>
+<body>
+  <h1>Open jobs in Vantaa</h1>
+  <canvas id="drawingcanvas" width="300" height="350">
+  </canvas>
+  <footer>
+    <div>
+    Source: <br>   
+    <a href="https://hri.fi/data/en_GB/dataset/vantaan-avoimet-tyopaikat-rajapinta">Job API for City of Vantaa vacancies</a>. The maintainer of the dataset is Vantaan kaupunki / Henkilöstö ja konsernipalvelut. The dataset has been downloaded from 
+    <a href="https://hri.fi/fi/">Helsinki Region Infoshare service</a>  on 26.01.2021 under the license 
+    <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0.</a>   
+    </div> 
+  </footer> 
+  
+</body>
+</html>
