@@ -23,6 +23,9 @@
     }
 
     function drawAllBars(data) {
+      if(data.length === 0) {
+        document.getElementById('title').textContent = 'No vacancies in Vantaa'
+      }
       let drawingCanvas = document.getElementById('drawingcanvas');
       let ctx = drawingCanvas.getContext('2d');
 
@@ -49,7 +52,7 @@
   </script>
 </head>
 <body>
-  <h1>Open jobs in Vantaa</h1>
+  <h1 id="title">Open jobs in Vantaa</h1>
   <canvas id="drawingcanvas" width="300" height="350">
   </canvas>
   <footer>
