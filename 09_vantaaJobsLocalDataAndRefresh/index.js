@@ -33,8 +33,9 @@ app.get('/json', async (req, res) => {
       res.json(data);
       console.log('Updated'); // For debugging. If in upeer part return true --> console: 'Updated', meaning it gets the data from Vantaa API
     } 
-    catch (error) {
-    res.sendStatus = 404;   
+    catch (err) {
+      console.log('update failed', err.message)
+      res.sendStatus = 404;   
     }
   }
   else {
