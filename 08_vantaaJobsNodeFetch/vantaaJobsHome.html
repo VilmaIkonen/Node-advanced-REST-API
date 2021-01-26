@@ -16,7 +16,7 @@
     document.addEventListener('DOMContentLoaded', init);
 
     function init() {
-      fetch('/json')
+      fetch('http://localhost:3000/json', {mode: 'cors'}) // when cors used, whole address needs to be defined here, not just '/json'
       .then(result => result.json())
       .then(data => drawAllBars(data))
       .catch(err => console.log(err));
