@@ -9,6 +9,43 @@
       border: 1px solid black;
     }
   </style>
+  <script>
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+      fetch('/api/v1/data')
+      .then(result => result.json())
+      .then(data => drawCurve(data))
+      .catch(err => concole.log(err.message));
+    }
+
+    function drawCurve(data) {
+      const canvasarea = document.getElementById('canvasarea');
+      const ctx = canvasarea.getContext('2d');    
+      
+      // Height scaling: One px cannot be one unit as the bar would be tens thousands high. Last data is the biggest value as cumulative data.
+      const casesPerPixel = data[data.length -1]/(canvasarea.height*0.9); 
+      // Width scaling:
+      canvasarea.width = data.length*2;
+      // translate origin to bottom left corner:
+      ctx.translate(0, canvasarea.height)
+      // y-axis up
+      ctx.scale(1, -1);
+      ctx.moveTo(0, 0);
+      ctx.strokeStyle = 'red';
+
+      // start from x=...? step..?
+      for(let i=0, x=2; i<data.length; i++, x+=2 ) {
+        ctx.lineTo(x, Math.floor(data[i]/casesPerPixel)) // start line from x and calculate y: round down to closest integer
+      }
+      ctx.stroke();
+      // change multiplier in all of these:
+      // canvasarea.width = data.length*5;
+      // for(let i=0, x=5; i<data.length; i++, x+=5 )
+    }
+    
+  </script>
 </head>
 <body>
   <h1>Cumulative COVID-19 cases in Finland</h1>
@@ -17,9 +54,16 @@
   </canvas>
   <footer>
     <div>
-      <p>ATTRIBUTION FOR DATA GOES HERE!</p>
+      <p>Source: </p>
+      <a href="https://covidapi.info">Covid19 API</a> /
+      <a href="https://mit-license.org">MIT licensed</a>
     </div>
-  </footer>
-  
+    <div>
+      <a href="">JHU CSSE COVID-19 Data</a>
+    </div>
+    <div>
+      <a href="">License CC 4.0 BY</a>
+    </div>
+  </footer>  
 </body>
 </html>
