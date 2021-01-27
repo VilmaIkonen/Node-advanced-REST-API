@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 in Finland</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+  <script>
+
+    document.addEventListener('DOMContentLoaded', init);
+
+    function init() {
+      fetch('/api/v1/daily')
+      .then(result => result.json())
+      .then(data => drawChart(data))
+      .catch(err => console.log(err.message));
+    }
+
+    function drawChart(data) {
+      const canvasarea = document.getElementById('canvasarea');
+      const ctx = canvasarea.getContext('2d');
+      canvasarea.width = data.length*3;
+      drawCurve(ctx, data, 3, canvasarea.height);
+    }
+
+    function drawCurve(ctx, data, lineSegmentLength, height) {
+      ctx.save();
+        const casesPerPixel = Math.max(...data)/(height*0.9);
+        ctx.translate(0, height);
+        ctx.scale(1, -1);
+        ctx.moveTo(0, data[0]); // moveTo 1st height of the data 1st line should not start from 0, but from first case count
+        ctx.strokeStyle = 'black';
+
+        for(let i=0, x=lineSegmentLength; i<data.length; i++, x+=lineSegmentLength) {
+          ctx.lineTo(x, Math.floor(data[i]/casesPerPixel));
+        }
+
+        ctx.stroke();
+      ctx.restore();
+    }
+
+        
+  </script>
+</head>
+<body>
+  <h1>COVID-19 cases in Finland (Daily line chart)</h1>
+  <canvas id="canvasarea" width="800" height="500">
+   
+  </canvas>
+  <footer>
+    <div>
+      <p>Source: </p>
+      <a href="https://covidapi.info">Covid19 API</a> /
+      <a href="https://mit-license.org">MIT licensed</a>
+    </div>
+    <div>
+      <a href="">JHU CSSE COVID-19 Data</a>
+    </div>
+    <div>
+      <a href="">License CC 4.0 BY</a>
+    </div>
+  </footer>  
+</body>
+</html>
