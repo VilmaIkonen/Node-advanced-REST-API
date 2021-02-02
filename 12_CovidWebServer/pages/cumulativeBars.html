@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>COVID-19 in Finland</title>
-  <style>
-    canvas {
-      border: 1px solid black;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css">
+  <script src="/js/draw.js"></script>
   <script>
 
     document.addEventListener('DOMContentLoaded', init);
@@ -16,28 +13,16 @@
     function init() {
       fetch('http://localhost:4000/api/v1/cases/cumulative', { mode: 'cors' })
       .then(result => result.json())
-      .then(data => drawBars(data))
+      .then(data => drawChart(data))
       .catch(err => console.log(err.message));
     }
 
-    function drawBars(data) {
+    function drawChart(data) {
       const canvasarea = document.getElementById('canvasarea');
       const ctx = canvasarea.getContext('2d');
-
-      const casesPerPixel = data[data.length -1]/(canvasarea.height*0.9); 
-      canvasarea.width = data.length*3;
-
-      // starting point for the bars:
-      ctx.translate(0, canvasarea.height);
-      ctx.fillStyle = 'red';
-      // ctx.scale(1, 1);      
-      
-      // Bar = 2px wide, gap 1px. start x from 0, increase by 3 = 1px wider than the bar
-      for(let i=0, x=0; i<data.length; i++, x +=3) {
-        const bar = Math.floor(data[i]/casesPerPixel);        
-        ctx.fillRect(x, -bar, 2, bar);
-        ctx.fillStyle = 'red'       
-      }
+      const barWidth = 2;
+      canvasarea.width = data.length * (barWidth+1);
+      drawBars(ctx, data, barWidth, canvasarea.height) 
     }
     
   </script>

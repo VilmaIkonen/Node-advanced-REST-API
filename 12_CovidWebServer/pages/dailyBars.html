@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>COVID-19 in Finland</title>
-  <style>
-    canvas {
-      border: 1px solid black;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css">
+  <script src="/js/draw.js"></script>
   <script>
 
     document.addEventListener('DOMContentLoaded', init);
@@ -28,20 +25,20 @@
       drawBars(ctx, data, barWidth, canvasarea.height) 
     }
 
-    function drawBars(ctx, data, barWidth, height) {
-      ctx.save();
-        const casesPerPixel = Math.max(...data)/(height*0.9);
-        // starting point for the bars:
-        ctx.translate(0, height);
-        ctx.fillStyle = 'red';
+    // function drawBars(ctx, data, barWidth, height) {
+    //   ctx.save();
+    //     const casesPerPixel = Math.max(...data)/(height*0.9);
+    //     // starting point for the bars:
+    //     ctx.translate(0, height);
+    //     ctx.fillStyle = 'red';
         
-        // Bar = 2px wide, gap 1px. start x from 0, increase by 3 = 1px wider than the bar
-        for (let i=0, x=0; i<data.length; i++, x+=barWidth+1) {
-          const bar = Math.floor(data[i]/casesPerPixel);// next - previous data
-          ctx.fillRect(x, -bar, barWidth, bar);
-        }
-      ctx.restore();
-    }
+    //     // Bar = 2px wide, gap 1px. start x from 0, increase by 3 = 1px wider than the bar
+    //     for (let i=0, x=0; i<data.length; i++, x+=barWidth+1) {
+    //       const bar = Math.floor(data[i]/casesPerPixel);// next - previous data
+    //       ctx.fillRect(x, -bar, barWidth, bar);
+    //     }
+    //   ctx.restore();
+    // }
     
   </script>
 </head>

@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>COVID-19 in Finland</title>
-  <style>
-    canvas {
-      border: 1px solid black;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css">
+  <script src="/js/draw.js"></script>
   <script>
 
     document.addEventListener('DOMContentLoaded', init);
@@ -27,22 +24,21 @@
       drawCurve(ctx, data, 3, canvasarea.height);
     }
 
-    function drawCurve(ctx, data, lineSegmentLength, height) {
-      ctx.save();
-        const casesPerPixel = Math.max(...data)/(height*0.9);
-        ctx.translate(0, height);
-        ctx.scale(1, -1);
-        ctx.moveTo(0, data[0]); // moveTo 1st height of the data 1st line should not start from 0, but from first case count
-        ctx.strokeStyle = 'black';
+    // function drawCurve(ctx, data, lineSegmentLength, height) {
+    //   ctx.save();
+    //     const casesPerPixel = Math.max(...data)/(height*0.9);
+    //     ctx.translate(0, height);
+    //     ctx.scale(1, -1);
+    //     ctx.moveTo(0, data[0]); /* moveTo 1st height of the data 1st line should not start from 0, but from first case count */
+    //     ctx.strokeStyle = 'black';
 
-        for(let i=0, x=lineSegmentLength; i<data.length; i++, x+=lineSegmentLength) {
-          ctx.lineTo(x, Math.floor(data[i]/casesPerPixel));
-        }
+    //     for(let i=0, x=lineSegmentLength; i<data.length; i++, x+=lineSegmentLength) {
+    //       ctx.lineTo(x, Math.floor(data[i]/casesPerPixel));
+    //     }
 
-        ctx.stroke();
-      ctx.restore();
-    }
-
+    //     ctx.stroke();
+    //   ctx.restore();
+    // }
         
   </script>
 </head>

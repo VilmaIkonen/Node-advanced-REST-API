@@ -11,17 +11,22 @@ const app = express();
 const server = http.createServer(app);
 
 // Webpage paths:
-const homePath = path.join(__dirname, 'home.html');
-const cumulativeBarsPath = path.join(__dirname, 'cumulativeBars.html');
-const dailyBarsPath = path.join(__dirname, 'dailyBars.html');
-const dailyLinePath = path.join(__dirname, 'dailyLine.html')
+const cumulativeLinePath = path.join(__dirname, '/pages/cumulativeLine.html');
+const cumulativeBarsPath = path.join(__dirname, '/pages/cumulativeBars.html');
+const dailyBarsPath = path.join(__dirname, '/pages/dailyBars.html');
+const dailyLinePath = path.join(__dirname, '/pages/dailyLine.html');
+const summaryPath = path.join(__dirname, '/pages/summary.html');
+const menuPath = path.join(__dirname, '/pages/menu.html');
 
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => res.sendFile(homePath));
+app.get('/', (req, res) => res.sendFile(menuPath));
+app.get('/cumulativeline', (req, res) => res.sendFile(cumulativeLinePath));
 app.get('/cumulativebars', (req, res) => res.sendFile(cumulativeBarsPath));
 app.get('/dailybars', (req, res) => res.sendFile(dailyBarsPath));
 app.get('/dailyline', (req,res) => res.sendFile(dailyLinePath));
+app.get('/summary', (req, res) => res.sendFile(summaryPath));
 
 // ###### no need for Endpoints in this web version, they are in rest server, port 4000 (task 11) ###### //
 
