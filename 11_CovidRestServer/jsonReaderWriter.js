@@ -2,15 +2,15 @@
 
 const fs = require('fs').promises;
 
-// async function readStorage(storageFile) {
-//   try {
-//     const data = await fs.readFile(storageFile, 'utf8');
-//     return JSON.parse(data);
-//   } 
-//   catch (error) {
-//     return [];
-//   }
-// }
+async function readStorage(storageFile) {
+  try {
+    const data = await fs.readFile(storageFile, 'utf8');
+    return JSON.parse(data);
+  } 
+  catch (error) {
+    return [];
+  }
+}
 
 async function writeStorage(storageFile, data) {
   try {
@@ -22,4 +22,4 @@ async function writeStorage(storageFile, data) {
   }
 }
 
-module.exports = { writeStorage };
+module.exports = { readStorage, writeStorage };

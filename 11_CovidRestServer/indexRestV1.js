@@ -12,7 +12,6 @@ const { dateToIsoDate, isoDateNow, addDays, addOneDay  } = require('./datelibrar
 const covidDataFile = path.join(__dirname, './FIN.json');
 let covidData = require(covidDataFile); // const --> let: as needs update
 const { port, host, countryCode } = require('./config.json');
-const {error} = require('console');
 
 // ############ Data update START ############
 
@@ -75,14 +74,48 @@ app.get('/api/v1/cases/daily', async(req, res) => {
   res.json(dailyCases);
 })
 
-// daily cases for selected interval --> array
-app.get('/api/v1/cases/daily/interval/:begindate/:enddate', (req, res) => {});
+// Return and array of objects like {date: "2021-01-01", confirmed: 36403}
+app.get('/api/v1/cases/daily/interval/:begindate/:enddate', async(req, res) => {
+  
+  // First check if data needs update
+  if(checkUpdate()) {
+    covidData = await updateCovidData();
+  }
 
-// cumulative cases until selected date 
-app.get('/api/v1/cases/cumulative/:enddate', (req, res) => {});
+  const beginISO = req.params.begindate;
+  const endISO = req.params.enddate;
+  const cases = [];
 
-// cases for a single date
-app.get('/api/v1/cases/daily/:date', (req, res) => {});
+  for(let date= beginISO; date <= endISO; date = addOneDay(date)) {
+    cases.push({date: date, confirmed: covidData.result[date].confirmed})
+  }
+  res.json(cases);
+});
+
+// Return number cumulative cases until given date: e.g. 2021-01-01 return 36404 
+app.get('/api/v1/cases/cumulative/:enddate', async(req, res) => {
+
+  // First check if data needs update
+  if(checkUpdate()) {
+    covidData = await updateCovidData();
+  }
+
+  res.json(covidData.result[req.params.enddate].confirmed);
+});
+
+// Return cases for a single date (this days cumul. - previous days cumul)
+app.get('/api/v1/cases/daily/:date', async(req, res) => {
+
+  // First check if data needs update
+  if(checkUpdate()) {
+  covidData = await updateCovidData();
+  }
+
+  const confirmedToday = covidData.result[req.params.date].confirmed;
+  const confirmedYesterday = covidData.result[addDays(req.params.date, -1)].confirmed;
+  res.json(confirmedToday - confirmedYesterday);
+
+});
 
 // ############ Endpoints END ############ //
 
