@@ -7,6 +7,7 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 
 const {writeStorage} = require('./jsonReaderWriter.js');
+const { dateToIsoDate, isoDateNow } = require('./datelibrary')
 
 const covidDataFile = path.join(__dirname, './FIN.json');
 let covidData = require(covidDataFile); // const --> let: as needs update
@@ -15,9 +16,9 @@ const {error} = require('console');
 
 // ############ Data update START ############
 
-function checkUpdate() {
-  const [isoDate, ] = new Date(Date.now()).toISOString().split('T'); // Returns only date, not the time (.split('T')) w/o --> eg. 2021-01-27T12:50:05.456Z
-  return false; //covidData.lastupdate != isoDate; // if same date, no update, if not, update.
+function checkUpdate() { 
+  return false; //covidData.lastupdate != isoDateNow(); // if same date, no update, if not, update.
+  // in testing phase 'return false' used. When update needed, go to localhost:4000/api/v1/cases and change 'false' --> 'true'
 }
 
 function updateCovidData() {
@@ -25,8 +26,7 @@ function updateCovidData() {
     try {
       const result = await fetch(`https://covidapi.info/api/v1/country/${countryCode}`);
       const data = await result.json();
-      const [isoDate, ] = new Date(Date.now()).toISOString().split('T');
-      data.lastupdate = isoDate;
+      data.lastupdate = isoDateNow();
       console.log('updated'); // just for debuging
       await writeStorage(covidDataFile, data);
       resolve(data);
@@ -45,8 +45,9 @@ const server = http.createServer(app);
 app.use(cors());
 
 // ############ Endpoints START ############ //
+// Remember to give endpoint descriptive and short names
 
-app.get('/api/v1/data', async(req, res) => {
+app.get('/api/v1/cases/cumulative', async(req, res) => {
 
   // First check if data needs update
   if(checkUpdate()) {
@@ -58,7 +59,7 @@ app.get('/api/v1/data', async(req, res) => {
   res.json(data);
 })
 
-app.get('/api/v1/daily', async(req, res) => {
+app.get('/api/v1/cases/daily', async(req, res) => {
 
   // First check if data needs update
   if(checkUpdate()) {
@@ -73,6 +74,15 @@ app.get('/api/v1/daily', async(req, res) => {
   }  
   res.json(dailyCases);
 })
+
+// daily cases for selected interval --> array
+app.get('/api/v1/cases/daily/interval/:begindate/:enddate', (req, res) => {});
+
+// cumulative cases until selected date 
+app.get('/api/v1/cases/cumulative/:enddate', (req, res) => {});
+
+// cases for a single date
+app.get('/api/v1/cases/daily/:date', (req, res) => {});
 
 // ############ Endpoints END ############ //
 
