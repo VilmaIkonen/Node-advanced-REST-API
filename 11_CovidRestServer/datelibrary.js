@@ -12,7 +12,7 @@ function isoDateNow() {
 // For using the date range in queries:
 function addDays(isoDate, daysToAdd) {
   const dayInMs = 24*60*60*1000; // one day in milliseconds
-  const date = new date(isoDate);
+  const date = new Date(isoDate);
   date.setTime(date.getTime() + dayInMs*daysToAdd); // getTime --> current time in ms
 
   return dateToIsoDate(date);

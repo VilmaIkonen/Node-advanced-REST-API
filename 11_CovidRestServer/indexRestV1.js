@@ -7,7 +7,7 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 
 const {writeStorage} = require('./jsonReaderWriter.js');
-const { dateToIsoDate, isoDateNow } = require('./datelibrary')
+const { dateToIsoDate, isoDateNow, addDays, addOneDay  } = require('./datelibrary')
 
 const covidDataFile = path.join(__dirname, './FIN.json');
 let covidData = require(covidDataFile); // const --> let: as needs update

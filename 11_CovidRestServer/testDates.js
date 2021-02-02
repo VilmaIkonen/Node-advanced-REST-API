@@ -1,9 +1,7 @@
 'use strict';
-const { dateToIsoDate, isoDateNow, addDays } = require('./datelibrary')
+const { dateToIsoDate, isoDateNow, addDays, addOneDay } = require('./datelibrary')
 
 // TESTS: 
-
-console.log(addDays(dateToIsoDate(someDate), 2))
 
 console.log(isoDateNow());
 
@@ -31,3 +29,22 @@ let u=2, i=3;
 console.log(u,i); // --> 2 3
 [u,i] = [i,u];
 console.log(u,i); // --> 3 2
+
+console.log('#################');
+
+console.log(addDays(dateToIsoDate(someDate), 2))
+
+for(let date = isoDateNow(), i=0; i<14; i++, date = addOneDay(date)) {
+  console.log(date);
+}
+
+
+console.log('#################');
+
+const enddate = addDays(isoDateNow(), 6);
+
+// 6 days from now:
+for(let date = isoDateNow(); date < enddate; date = addOneDay(date)) {
+  console.log(date);
+}
+
