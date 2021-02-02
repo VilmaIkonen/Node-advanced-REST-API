@@ -99,8 +99,12 @@ app.get('/api/v1/cases/cumulative/:enddate', async(req, res) => {
   if(checkUpdate()) {
     covidData = await updateCovidData();
   }
-
-  res.json(covidData.result[req.params.enddate].confirmed);
+  if(covidData.result[req.params.enddate].confirmed) {
+    res.json({data: covidData.result[req.params.enddate].confirmed});
+  }
+  else {
+    res.json({error: 'not found'})
+  }
 });
 
 // Return cases for a single date (this days cumul. - previous days cumul)
