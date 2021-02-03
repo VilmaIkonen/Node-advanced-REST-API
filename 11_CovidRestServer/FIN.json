@@ -1,5 +1,5 @@
 {
-    "count": 374,
+    "count": 377,
     "result": {
         "2020-01-22": {
             "confirmed": 0,
@@ -1870,7 +1870,22 @@
             "confirmed": 44402,
             "deaths": 671,
             "recovered": 31000
+        },
+        "2021-01-30": {
+            "confirmed": 44871,
+            "deaths": 671,
+            "recovered": 31000
+        },
+        "2021-01-31": {
+            "confirmed": 45238,
+            "deaths": 671,
+            "recovered": 31000
+        },
+        "2021-02-01": {
+            "confirmed": 45482,
+            "deaths": 677,
+            "recovered": 31000
         }
     },
-    "lastupdate": "2021-02-02"
+    "lastupdate": "2021-02-03"
 }

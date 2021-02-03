@@ -20,7 +20,9 @@ const { port, host, countryCode } = require('./config.json');
 
 function checkUpdate() { 
   return false; // in testing phase 'return false' used. When update needed, go to localhost:4000/api/v1/cases and change 'false' --> 'true'
+  
   //covidData.lastupdate != isoDateNow(); // if same date, no update, if not, update.
+  console.log('updated!');
 }
 
 function updateCovidData() {
