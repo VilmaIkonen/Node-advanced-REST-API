@@ -11,7 +11,7 @@
     document.addEventListener('DOMContentLoaded', init);
 
     function init() {
-      fetch('http://localhost:4000/api/v1/cases/cumulative')
+      fetch('http://localhost:4000/api/v1/cases/cumulative') // Full url must be here as the origin is from other server
       .then(result => result.json())
       .then(data => drawChart(data))
       .catch(err => console.log(err.message));
@@ -52,9 +52,8 @@
 </head>
 <body>
   <h1>Cumulative COVID-19 cases in Finland</h1>
-  <canvas id="canvasarea" width="800" height="500">
-   
-  </canvas>
+  <canvas id="canvasarea" width="800" height="500"></canvas>
+  <button><a href="/">Back to main page</a></button>
   <footer>
     <div>
       <p>Source: </p>
