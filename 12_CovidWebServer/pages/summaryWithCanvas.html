@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Summary</title>
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css">
+  <script src="/js/draw.js"></script>
+  <script src="/js/summaryWithCanvas.js"></script>
+</head>
+<body>
+  <h1>Covid19 cases</h1>
+  <div>
+    <label>Start date in ISO format <input type="text" id="startdate"></label>
+  </div>
+  <div>
+    <label>End date in ISO format <input type="text" id="enddate"></label>
+    <button id="send">SEND</button>
+  </div>   
+  <canvas id="canvasarea" width="800" height="500"></canvas>
+  <div>
+    <button><a href="/">Back to main page</a></button>
+  </div>  
+  <footer>
+    <div>
+      <p>Source: </p>
+      <a href="https://covidapi.info">Covid19 API</a> /
+      <a href="https://mit-license.org">MIT licensed</a>
+    </div>
+    <div>
+      <a href="">JHU CSSE COVID-19 Data</a>
+    </div>
+    <div>
+      <a href="">License CC 4.0 BY</a>
+    </div>
+  </footer> 
+</body>
+</html>
