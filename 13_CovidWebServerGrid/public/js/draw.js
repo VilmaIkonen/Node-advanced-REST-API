@@ -7,8 +7,8 @@ function drawBars(ctx, data, barWidth, area) {
     ctx.translate(area.x, area.y);
     ctx.fillStyle = 'red';    
     // Bar = 2px wide, gap 1px. start x from 0, increase by 3 = 1px wider than the bar
-    for (let i=0, x=0; i<data.length; i++, x+=barWidth+1) {
-      const bar = Math.floor(data[i]/area.ratioY);// next - previous data
+    for (let i=0, x=0; i<data.length; i++, x+=barWidth +1) {
+      const bar = Math.floor(data[i] * area.ratioY);// next - previous data
       ctx.fillRect(x, -bar, barWidth, bar);
     }
   ctx.restore();
@@ -19,12 +19,13 @@ function drawCurve(ctx, data, lineSegmentLength, area) {
     ctx.beginPath();
     ctx.translate(area.x, area.y);
     ctx.scale(1, -1);
-    ctx.moveTo(0, data[0]); // moveTo 1st height of the data 1st line should not start from 0, but from first case count
+    ctx.moveTo(0, 0); 
     ctx.strokeStyle = 'black';
 
     for(let i=0, x=lineSegmentLength; i<data.length; i++, x+=lineSegmentLength) {
-      ctx.lineTo(x, Math.floor(data[i]/area.ratioY));
+      ctx.lineTo(x, Math.floor(data[i] * area.ratioY));
     }
+
     ctx.stroke();
   ctx.restore();
 }

@@ -26,7 +26,7 @@ class Grid {
     ctx.save();
       const exp = Math.floor(Math.log10(this.maxYData)); // see below
       const step = Math.pow(10, exp); // eg. exp = 2 --> step = 100
-      const upperLimit = Math.ceil(this.maxYData/step)*step; // eg. maxYData = 834 --> exp = 2 --> step = 100. this.maxYData/step = 834/100 = 8,34 --> ceil --> 9 --> 9 * step --> upperLimit = 900      
+      const upperLimit = Math.ceil(this.maxYData/step) * step; // eg. maxYData = 834 --> exp = 2 --> step = 100. this.maxYData/step = 834/100 = 8,34 --> ceil --> 9 --> 9 * step --> upperLimit = 900      
       const labels = [];
       for (let i = 0; i <= upperLimit; i += step) {
         labels.push(i);
@@ -44,10 +44,10 @@ class Grid {
   
       ctx.beginPath(); 
       ctx.strokeStyle = this.options.color.grid;
-      ctx.fillStyle = this.options;
+      ctx.fillStyle = this.options.color.text;
       for(let label of labels) {
         const y = Math.floor(this.ratio * label);
-        ctx.fillText(label, -this.maxYData, -y) // text x cordinate is the left lower corner --> -this.maxYData
+        ctx.fillText(label, -maxWidth, -y) // text x cordinate is the left lower corner --> -this.maxYData
         ctx.moveTo(0, -y); // label starts always from x=0
         ctx.lineTo(this.area.width, -y); 
         ctx.stroke();
@@ -69,9 +69,9 @@ class Grid {
   static getLabelAreaWidth(ctx, label, font) {
     ctx.save();
       ctx.font = font;
-      const labelLenght = Math.ceil(ctx.measureText(label).width);
+      const labelLength = Math.ceil(ctx.measureText(label).width);
     ctx.restore();
-    return labelLenght;
+    return labelLength;
   }
 }
 
