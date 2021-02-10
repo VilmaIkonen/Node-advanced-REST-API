@@ -34,6 +34,14 @@ async function runMain() {
   console.log('###############');
   await getAll();
   console.log('###############');
+  await update({ // when calling the function, the order of values does not matter! (see below in update())
+    employeeId: 3,
+    firstname: 'Kallex',
+    lastname: 'Mountainx',
+    department: 'Salesx',
+    salary: 4500
+  });
+  console.log('###############');
   await remove(3);
   console.log('###############');
   await getAll();
@@ -109,3 +117,20 @@ async function remove(employeeId) {
   }
 }
 
+async function update(employee) {
+  try {
+    const parameters = [
+      employee.firstname,
+      employee.lastname,
+      employee.department,
+      +employee.salary,
+      +employee.employeeId // id as last because in sql query 'id' is queried as last in 'where'
+    ];
+
+    const sql = 'update employee set firstname=?, lastname=?, department=?, salary=? where employeeId=?' // sql query determines order of the values in the array!
+    const status = await db.doQuery(sql, parameters);
+    console.log('Update status ', status);
+  }
+  catch(err) {
+    console.log(err);
+ }}
