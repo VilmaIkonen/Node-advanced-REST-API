@@ -6,7 +6,7 @@ const mariadb = require('mariadb');
 module.exports = class Database {
 
   // object that needs to be defined in the calling is in this constructor. comes from mariadb...?
-  constructor(optios) {
+  constructor(options) {
     this.options = options;
   }
 

@@ -14,7 +14,7 @@ CREATE TABLE employee(
 
 CREATE user IF NOT EXISTS 'zeke'@'localhost' identified by 'secret';
 -- change here the username and connected pswd that will be used.
-GRANT all privileges ON employeedb.* to 'root'@'localhost';
+GRANT all privileges ON employeedb.* to 'vilma'@'localhost';
 -- GRANT all privileges ON employeedb.employee --> can use only table "employee" in employeedb
 
 INSERT INTO employee VALUES(1, 'Matt', 'River', 'ICT', 3000);
