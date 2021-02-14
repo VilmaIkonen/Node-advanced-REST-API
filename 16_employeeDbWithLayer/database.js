@@ -30,7 +30,7 @@ module.exports = class Database {
         else {
           resolve({ // naming mariadb default values accorging our API description
             queryResult: {
-              rowsAffected: queryResult.affectedRows,
+              rowsChanged: queryResult.affectedRows,
               insertId: queryResult.insertId,
               status: queryResult.warningStatus 
             }
