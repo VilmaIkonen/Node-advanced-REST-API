@@ -10,7 +10,7 @@ module.exports = class Database {
     this.options = options;
   }
 
-  doQuery(sql, paramaters, connection) {
+  doQuery(sql, parameters, connection) {
     return new Promise(async (resolve, reject) => {
       let newConnection = false; 
       try {
@@ -20,10 +20,7 @@ module.exports = class Database {
           newConnection = true;
         }
         let queryResult = await connection.query(sql, parameters); // query of mariadb library
-        if(typeof queryResult === 'undefined') { // this should not ever happen...
-          reject('Query error');
-        }
-        else if (typeof queryResult.affectedRows === 'undefined') {
+        if (typeof queryResult.affectedRows === 'undefined') {
           delete queryResult.meta;
           resolve({queryResult, resultSet: true}); // same as: resolve({queryResult: queryResult, resultSet: true});
         }
