@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>tehtävät</title>
+  <style>
+    
+ #valikko button {
+   width: 20em;
+ }
+
+ section > h2, main>h1 {
+   background-color: beige;
+ }
+
+ @media print {
+    #valikko,
+    #syote,
+    #haku,
+    #kaikki,
+    #virhe {
+      page-break-inside: avoid;
+      page-break-after: always;
+      padding: 10px;
+      height: 420px;
+      border: solid grey 1px;
+    }
+
+    #kaikki {
+      height: 1000px;
+    }
+
+    body {
+      font-size: 10pt;
+    }
+    section {
+      page-break-after: always;
+    }
+    section > div:last-of-type{
+      page-break-after:avoid;
+    }
+ }
+
+ @media screen {
+   #valikko,
+   #syote,
+   #haku,
+   #kaikki,
+   #virhe {
+     page-break-inside: avoid;
+     border: solid gray 1px;
+     padding: 1em;
+     margin: 10px;
+     height: 600px;
+   }
+
+   body {
+     font-size: 12pt;
+   }
+ }
+
+
+ ul.taulu {
+   font-family: monospace;
+   font-weight: bold;
+ }
+
+ input {
+   display: inline-block;
+   height: 20px;
+   border: black solid 2px;
+ }
+
+ label {
+   display: inline-block;
+   width: 150px;
+ }
+
+ .lihavointi {
+   font-weight: bold;
+ }
+
+ div {
+   padding: 10px;
+ }
+
+ .iso {
+   font-size: 16pt;
+ }
+
+ h2 .iso {
+   font-size: 24pt;
+ }
+
+ th,
+ td {
+   padding: 10px;
+   text-align: left;
+ }
+
+ .huom {
+   padding: 1em;
+   border: dashed 1px red;
+ }
+
+ .konsolivalikko>ol>li {
+   margin-left:1em;
+   font-family: monospace;
+ }
+
+ pre, .konsolivalikko>ol {
+   width: 70%;
+   padding: 1em;
+   background-color: lightgray;
+   font-weight: bold;
+ }
+
+ .avain {
+   color:blue;
+   font-weight: bold;
+ }
+
+ .arvo{
+   color:red;
+ }
+
+ .olioalku, .olioloppu, .taulukko{
+   font-weight: bold;
+ }
+ .olio{
+   padding-left:1em;
+   padding-top:0;
+   padding-bottom: 0;
+ }
+
+ .rivi{
+   padding:0;
+ }
+
+ .arvo.varchar::before{
+    content: '\0022';
+ }
+ .arvo.varchar::after {
+   content: '\0022';
+ }
+
+ .jsondata {
+   font-family: monospace;
+ }
+
+ table.csvdata {
+   border-collapse: collapse;
+   border: solid 1px black;
+ }
+
+ table.csvdata th {
+   background-color: lightgrey;
+   border-bottom: 1px solid black;
+ }
+
+ table.csvdata td,
+ table.csvdata th {
+   border-right: 1px solid black;
+   border-left: 1px solid black;
+ }
+
+  .xmldata .elementti,
+  .xmldata .elementtiloppu {
+    padding-left: 1em;
+  }
+
+  .xmldata .kentta {
+    padding-left: 2em;
+  }
+  </style>
+</head>
+  <body>
+    <header>Emma Example</header>
+    <main>
+      <h1> Tasks</h1>
+      <ol>
+      
+          <li>Create a folder for the project</li> 
+      
+          <li>Write create statements for the database</li> 
+      
+          <li>Create the database</li> 
+      
+          <li>Create data access layer for the database</li> 
+      
+          <li>Create a console application to fetch, add, update or delete the data</li> 
+      
+      </ol>
+      
+      
+        <section class="projektinAlustusEN">
+          <h2>1 Create a folder for the project</h2>
+        
+          <div>
+     Create a folder for the project. Name the folder with
+     <strong>Example_Emma_flower_project</strong>.
+  </div>
+  <div>
+    
+  </div>
+  
+  <div>
+    Install <strong>mariadb</strong> library into the project folder.
+  </div>
+  
+  
+  <div>
+    Install all necessary libraries to the project.
+  </div>
+  
+        </section>
+      
+        <section class="luontilauseetSqlEN">
+          <h2>2 Write create statements for the database</h2>
+        
+          <div>
+    Write create statements to create a database called
+    <strong><span class="iso">flowerdb</span></strong>.
+  </div>
+  <div>Create a table <strong>flower</strong>, for
+    flower data. Table columns are:
+  </div>
+  <ul class="taulu">
+    
+    <li>
+      flowerId
+      integer
+    </li>
+    
+    <li>
+      name
+      varchar(26)
+    </li>
+    
+    <li>
+      unitPrice
+      integer
+    </li>
+    
+    <li>
+      site
+      varchar(15)
+    </li>
+    
+    <li>
+      stock
+      integer
+    </li>
+    
+  </ul>
+  <div>
+     All columns are mandatory. The primary key is <strong>flowerId</strong>.
+  </div>
+  <div>
+    Add two insert statements into the create statements for testing.
+  </div>
+  <div>
+    Create user <strong> leo@localhost
+    </strong> with password <strong> g0SfVD7s</strong>.
+    Grant all necessary privileges to the user.
+  </div>
+  
+  <div class="huom">
+    
+    <div>
+      Save all necessary create statements
+      
+      
+      
+      into a sql file
+      <strong>Example_Emma_flower_createStatements.sql</strong>
+      
+    </div>
+    
+  </div>
+        </section>
+      
+        <section class="luoTietokantaEN">
+          <h2>3 Create the database</h2>
+        
+            <div>
+      Create the database with the create statements
+      .
+    </div> 
+        </section>
+      
+        <section class="tietovarastokerrosEN">
+          <h2>4 Create data access layer for the database</h2>
+        
+          <div>Create a datastorage layer with all necessary methods.</div>
+  <h3>Necessary operations:</h3>
+  <div>Your data access layer should have the following operations:
+    <ul class="operaatiot">
+    
+    <li><strong class="iso">get all</strong></li>
+    
+     
+    <li><strong class="iso">get one</strong></li>
+    
+    
+     
+    <li><strong class="iso">insert</strong></li>
+    
+     
+    <li><strong class="iso">update</strong></li>
+    
+     
+    <li><strong class="iso">remove</strong></li>
+    
+    </ul>
+  </div>
+  
+    
+    <div>
+      In the startup phase of the server the data is read from the data file.
+      
+      The data strorage in this version is in memory only,
+      so all changes of the data is done only in memory and they are not 
+      saved back to the disk file.
+      
+    </div>
+      
+    
+        </section>
+      
+        <section class="konsolivalikkoEN">
+          <h2>5 Create a console application to fetch, add, update or delete the data</h2>
+        
+          <div>
+    Create a console menu. Menu has all necessary operations.
+  </div>
+  
+<div class="konsolivalikko">
+  Choose:
+  <ol>
+    
+    
+    <li> get all flowers</li>
+    
+    
+    <li> get flower</li>
+    
+    
+    <li>add flower</li>
+    
+    
+    <li>update flower</li>
+    
+    
+    <li>remove flower</li>
+    
+    <li>exit</li>
+  </ol>
+  Your choise ( 1,2,3,4,5 tai 6): 
+</div>
+<p>Choosing wrong number spawns an error message:</p>
+<pre>
+###################################
+ Choose number 1,2,3,4,5 or 6
+###################################
+</pre>
+<h2>Output examples:</h2>
+<p>You may format the output differently</p>
+<div id="haku">
+  <div id="haeyksi">
+    <h1>Query result</h1>
+    <pre>
+      
+flowerId:  2
+      
+name:  tulip
+      
+unitPrice:  7
+      
+site:  half shadow
+      
+stock:  150
+      
+    </pre>
+  </div>
+</div>
+<div id="kaikki">
+    <h1>Get all</h1>
+  <pre>
+    
+    
+flowerId | name | unitPrice | site | stock | 
+    
+2 | tulip | 7 | half shadow | 150 | 
+      
+6 | violet | 10 | garage | 13 | 
+      
+5 | toadstool | 6 | shady | 10 | 
+      
+1 | lily-of-the-valley | 9 | swamp | 1 | 
+      
+7 | mushroom | 8 | sunny | 20 | 
+      
+4 | marigold | 4 | rocky | 100 | 
+      
+3 | rose | 3 | bucket | 15 | 
+      
+  </pre>
+</div>
+<h4>Input library</h4>
+<p>You can use this function for reading input</p>
+<pre>
+  module.exports = prompt => {
+    process.stdout.write(prompt);
+    return new Promise(resolve => {
+      const syote = process.stdin;
+      syote.resume();
+      syote.once('data', (data) => {
+        syote.pause();
+        resolve(data.toString().trim());
+      });
+    });
+  };
+</pre>
+        </section>
+        
+    </main> 
+  </body>
+</html>

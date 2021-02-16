@@ -1,0 +1,17 @@
+{
+  "getAll" : [
+    "SELECT flowerId, name, unitPrice, site, stock FROM flower"
+  ],
+  "get": [
+    "SELECT flowerId, name, unitPrice, site, stock FROM flower WHERE flowerId=?"
+  ],
+  "insert": [
+    "INSERT INTO flower (name, unitPrice, site, stock, flowerId) values(?, ?, ?, ?, ?)"
+  ],
+  "update": [
+    "UPDATE flower ser name=?, unitPrice=?, site=?, stock=? WHERE flowerId=?"
+  ],
+  "remove": [
+    "DELETE FROM flower WHERE flowerId=?"
+  ]
+}
