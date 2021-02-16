@@ -32,19 +32,14 @@ const DEFAULT_OPTIONS = {
 module.exports = class EmployeeDb {
 
   constructor(options = DEFAULT_OPTIONS) {
-    this.db = new Database(options); // Create new db withgiven options
+    this.db = new Database(options); // Create new db with given options
   }
 
   getAll() {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await this.db.doQuery(getAllSql);
-        if(result.resultSet) {
-          resolve(result.queryResult);
-        }
-        else {
-          reject('Something went wrong');
-        }
+        resolve(result.queryResult);
       }
       catch(err) {
         reject(err);
@@ -55,18 +50,13 @@ module.exports = class EmployeeDb {
   get(employeeId) {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = await this.db.doQuery(getSql, [+employeeId]);
-        if(result.resultSet) {
-          if(result.queryResult.length >0) {
-            resolve(result.queryResult[0])
-          }
-          else {
-            resolve(`Employee ${employeeId} not found`) // can be resolved with text, object... whatever
-          }         
+        const result = await this.db.doQuery(getSql, [+employeeId]); 
+        if(result.queryResult.length >0) {
+          resolve(result.queryResult[0])
         }
         else {
-          reject('Something went wrong') // should never end up here
-        }
+          resolve(`Employee ${employeeId} not found`) // can be resolved with text, object... whatever
+        }         
       }
       catch(err){
         reject(err);

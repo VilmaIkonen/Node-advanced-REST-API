@@ -19,11 +19,8 @@ module.exports = class Database {
           connection = await mariadb.createConnection(this.options);
           newConnection = true;
         }
-        let queryResult = await connection.query(sql, parameters); // query of mariadb library
-        if(typeof queryResult === 'undefined') { // this should not ever happen...
-          reject('Query error');
-        }
-        else if (typeof queryResult.affectedRows === 'undefined') {
+        let queryResult = await connection.query(sql, parameters); // query of mariadb library        
+        if (typeof queryResult.affectedRows === 'undefined') {
           delete queryResult.meta;
           resolve({queryResult, resultSet: true}); // same as: resolve({queryResult: queryResult, resultSet: true});
         }
