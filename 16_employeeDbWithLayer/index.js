@@ -19,6 +19,22 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
-app.get('/all', async(req, res) => res.json(await db.getAll()));
+app.get('/employees', async(req, res) => {
+  try {
+    res.json(await db.getAll())
+  }
+    catch(err) {
+    console.log(err)
+  }
+});
 
-server.listen(port, host, () => console.log(`Server running in ${host} at port ${port}`));
+app.get('/employees/:employeeId', async(req, res) => {
+  try {
+    res.json(await db.get(+req.params.employeeId))
+  } 
+  catch (err) {
+    console.log(err)
+  }
+})
+
+server.listen(port, host, () => console.log(`Server running in ${host} at port ${port}`))
