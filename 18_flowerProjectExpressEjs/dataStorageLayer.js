@@ -3,6 +3,7 @@
 const Database = require('./database');
 const options = require('./databaseOptions.json')
 const sql = require('./sqlStatements.json');
+const {CODES, MESSAGES} = require('./statusCodes');
 const {toArray} = require('./parameters');
 
 // sql statements in separate file just for better readability
@@ -11,12 +12,6 @@ const getSql = sql.get.join(' ');
 const insertSql = sql.insert.join(' ');
 const updateSql = sql.update.join(' ');
 const removeSql = sql.remove.join(' ');
-
-// console.log(getAllSql);
-// console.log(getSql);
-// console.log(insertSql);
-// console.log(updateSql);
-// console.log(removeSql);
 
 module.exports = class Datastorage {
   
@@ -44,11 +39,11 @@ module.exports = class Datastorage {
           resolve(result.queryResult[0]); // first item where id requirement met (the only item...)
         }
         else {
-          resolve({status: `Id ${id} not found`});
+          resolve(MESSAGES.NOT_FOUND('flowerId', id));
         }
       } 
       catch (err) {
-        reject(err);
+        reject(MESSAGES.PROGRAM_ERROR());
       }
     })
   }
@@ -57,10 +52,10 @@ module.exports = class Datastorage {
     return new Promise(async (resolve, reject) => {
       try {
         const status = await this.db.doQuery(insertSql, toArray(resource));
-        resolve({status: 'Insert OK'})
+        resolve(MESSAGES.INSERT_OK('flowerId', resource.flowerId))
       } 
       catch (err) {
-        reject(err);
+        reject(MESSAGES.PROGRAM_ERROR());
       }
     })
   }
@@ -68,16 +63,16 @@ module.exports = class Datastorage {
   update(resource) {
     return new Promise(async (resolve, reject) => {
       try {
-        const status = await this.db.doQuery(updateSql, toArray(resource));
+        const result = await this.db.doQuery(updateSql, toArray(resource));
         if(result.queryResult.rowsChanged === 0) {
-          resolve({status: 'Not updated'})
+          resolve(MESSAGES.NOT_UPDATED());
         }
         else {
-          resolve({status: 'Update OK'})
+          resolve(MESSAGES.UPDATE_OK('flowerId', resource.flowerId));
         }     
       } 
       catch (err) {
-        reject(err);
+        reject(MESSAGES.PROGRAM_ERROR());
       }
     })
   }
@@ -87,14 +82,14 @@ module.exports = class Datastorage {
       try {
         const result = this.db.doQuery(removeSql, [+id]);
         if(result.queryResult.rowChanged === 1) {
-          resolve({status: 'Remove OK'});
+          resolve(MESSAGES.DELETE_OK('flowerId', id));
         }
         else {
-          resolve({status: `Resourcewith id ${id} not removed`})
+          resolve(MESSAGES.NOT_DELETED('flowerId', id));
         }
       } 
       catch (err) {
-        reject(err)
+        reject(MESSAGES.PROGRAM_ERROR());
       }
     })
   }

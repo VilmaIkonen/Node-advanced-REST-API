@@ -40,8 +40,8 @@ async function menu() {
         try {
           const id = await prompt('Input flower id: ');
           const result = await db.get(+id);
-          if(result.status) {
-            console.log(result.status);
+          if(result.message) {
+            console.log(result.message);
           }
           else {
             printFlower(result);
@@ -54,7 +54,7 @@ async function menu() {
       case '3':
         try {
           const result = await db.insert(await readFlowerData());
-          console.log(result.status);          
+          console.log(result);          
         } 
         catch (err) {
           console.log(err);
@@ -63,7 +63,7 @@ async function menu() {
       case '4':
         try {
           const result = await db.update(await readFlowerData());
-          console.log(result.status);          
+          console.log(result);          
         } 
         catch (err) {
           console.log(err);
@@ -73,7 +73,7 @@ async function menu() {
         try {
           const id = await prompt('Input flower id: ');
           const result = await db.remove(+id);
-          console.log(result.status);          
+          console.log(result);          
         } 
         catch (err) {
           console.log(err);
