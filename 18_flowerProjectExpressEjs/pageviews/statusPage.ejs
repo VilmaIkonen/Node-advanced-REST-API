@@ -4,10 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Status</title>
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css">
 </head>
 <body>
   <div class="<%= status.type %>">
-  <% if(status.type === "error") { %>
+  <% if(status.type === 'error') { %>
     <h1>Error</h1>
   <% } else { %>
     <h1>Status</h1>

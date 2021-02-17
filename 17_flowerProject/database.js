@@ -8,7 +8,7 @@ module.exports = class Database {
     this.options = options;
   }
 
-  doQuery(sql, paramaters, connection) {
+  doQuery(sql, parameters, connection) {
     return new Promise(async (resolve, reject) => {
       let newConnection = false; 
       try {
@@ -27,7 +27,8 @@ module.exports = class Database {
               rowsChanged: queryResult.affectedRows,
               insertId: queryResult.insertId,
               status: queryResult.warningStatus 
-            }
+            },
+            resultSet: false
           })
         }
       }

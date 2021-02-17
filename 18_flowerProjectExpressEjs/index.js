@@ -16,6 +16,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'pageviews'));
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, 'public'))); // for using contents in 'public' folder
 
 // Routes:
 app.get('/', (req, res) => {
@@ -44,7 +45,7 @@ app.get('/insert', (req, res) => {
 		title: 'Insert', 
 		header: 'Add new', 
 		action: '/insert', 
-		id: { value: '', readonly: ''},
+		flowerId: { value: '', readonly: ''},
 		name: { value: '', readonly: ''},
 		site: { value: '', readonly: ''},
 		unitPrice: { value: '', readonly: ''},
@@ -62,7 +63,7 @@ app.get('/updateform', (req, res) => {
 		title: 'Update', 
 		header: 'Update', 
 		action: '/updatedata', 
-		id: { value: '', readonly: ''},
+		flowerId: { value: '', readonly: ''},
 		name: { value: '', readonly: 'readonly'},
 		site: { value: '', readonly: 'readonly'},
 		unitPrice: { value: '', readonly: 'readonly'},
@@ -71,8 +72,8 @@ app.get('/updateform', (req, res) => {
 })
 app.post('/updatedata', async (req, res) => {
 	try {
-		const id = req.body.id;
-		const result = await storage.get(id);
+		const flowerId = req.body.flowerId;
+		const result = await storage.get(flowerId);
 		if(result.message) {
 			res.render('statusPage', { status: result })
 		}
@@ -81,7 +82,7 @@ app.post('/updatedata', async (req, res) => {
 				title: 'Update', 
 				header: 'Update', 
 				action: '/update', 
-				id: { value: result.id, readonly: 'readonly'},
+				flowerId: { value: result.flowerId, readonly: 'readonly'},
 				name: { value: result.name, readonly: ''},
 				site: { value: result.site, readonly: ''},
 				unitPrice: { value: result.unitPrice, readonly: ''},
@@ -101,7 +102,10 @@ app.post('/update', (req, res) => {
 
 
 app.get('/remove', (req, res) => {
-	res.render('sendIdPage', { title: 'Remove', header: 'Remove', action: '/remove'})
+	res.render('sendIdPage', { 
+		title: 'Remove', 
+		header: 'Remove', 
+		action: '/remove'})
 });
 app.post('/remove', (req, res) => {
 	const id = req.body.id;

@@ -1,0 +1,11 @@
+input[readonly] {
+  background-color: lightgray;
+}
+
+.error {
+  color: red;
+}
+
+.info {
+  color: green;
+}
