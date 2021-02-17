@@ -11,7 +11,7 @@ CREATE TABLE flower(
 );
 
 DROP user IF EXISTS 'leo'@'localhost';
-CREATE user 'leo'@'localhost' identified BY 'g0SfVD7s';
+CREATE user 'leo'@'localhost' identified WITH 'g0SfVD7s';
 GRANT all privileges ON flowerdb.* TO 'leo'@'localhost';
 
 INSERT INTO flower VALUES(1, 'tulip', 10, 'shade', 200);
