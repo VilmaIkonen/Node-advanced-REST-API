@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All</title>
+</head>
+<body>
+  <main>
+    <h1>All</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Site</th>
+          <th>Unit price</th>
+          <th>Stock</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(flower => { %>
+          <tr>
+            <td><%= flower.flowerId %></td>
+            <td><%= flower.name %></td>
+            <td><%= flower.site %></td>
+            <td><%= flower.unitPrice %></td>
+            <td><%= flower.stock %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <a href="/"><button>Menu</button></a>
+  </main>
+</body>
+</html>

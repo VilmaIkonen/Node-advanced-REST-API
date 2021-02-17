@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Status</title>
+</head>
+<body>
+  <div class="<%= status.type %>">
+  <% if(status.type === "error") { %>
+    <h1>Error</h1>
+  <% } else { %>
+    <h1>Status</h1>
+  <% } %>
+    <p> <%= status.message %> </p>
+  </div>
+  <a href="/"><button>Menu</button></a>
+</body>
+</html>

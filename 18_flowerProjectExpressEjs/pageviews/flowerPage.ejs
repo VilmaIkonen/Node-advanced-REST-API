@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flower data</title>
+</head>
+<body>
+  <main>
+    <h1>Flower</h1>
+    <% if(data.message) { %>
+      <p class="<%= data.type %>">
+        <%= data.message %>
+      </p>
+    <% } else { %>
+      <p>Id: <%= data.flowerId %></p>
+      <p>Name: <%= data.name %></p>
+      <p>Site: <%= data.site%></p>
+      <p>Unit price: <%= data.unitPrice %> €</p>
+      <p>Stock: <%= data.stock %> unit(s)</p>
+    } %> %>
+    <a href="/"><button>Menu</button></a>
+  </main>
+</body>
+</html>

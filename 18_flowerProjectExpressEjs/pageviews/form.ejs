@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+</head>
+<body>
+  <h1><%= header %></h1>
+  <form action="<%= action %>" method="POST">
+    <div>
+      <p>
+        <label for="id">Id</label>
+        <input type="text" name="id" id="id" size="5" value="<%= id.value %>" <%= id.readonly %>>
+      </p>
+      <p>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" size="25" value="<%= name.value %>" <%= name.readonly %>>
+      </p>
+      <p>
+        <label for="site">Site</label>
+        <input type="text" name="site" id="site" size="25" value="<%= site.value %>" <%= site.readonly %>>
+      </p>
+      <p>
+        <label for="unitPrice">Unit price</label>
+        <input type="text" name="unitPrice" id="unitPrice" size="25" value="<%= unitPrice.value %>" <%= unitPrice.readonly %>>
+      </p>
+      <p>
+        <label for="stock">Stock</label>
+        <input type="text" name="stock" id="stock" size="5" value="<%= stock.value %>" <%= stock.readonly %>>
+      </p>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  <a href="/"><button>Menu</button></a>  
+</body>
+</html>

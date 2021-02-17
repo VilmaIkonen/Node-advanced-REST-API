@@ -19,6 +19,10 @@ module.exports = class Datastorage {
     this.db = new Database(options);
   }
 
+  get CODES() {
+    return CODES;
+  }
+
   getAll() {
     return new Promise(async (resolve, reject) => {
       try {
@@ -26,7 +30,7 @@ module.exports = class Datastorage {
         resolve(result.queryResult);  
       } 
       catch (err) {
-        reject(err)
+        reject(MESSAGES.PROGRAM_ERROR())
       }
     })
   }
