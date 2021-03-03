@@ -58,15 +58,16 @@ app.route('/remove')
   }
 });
 
-app.get('/insertform', (req, res) => res.render('form', {
-  title: 'Add a book', 
-  header: 'Book data', 
-  action: '/insert', 
-  bookID: {value: '', readonly: ''},
-  name: {value: '', readonly: ''},
-  author: {value: '', readonly: ''},
-  type: {value: '', readonly: ''},
-  year: {value: '', readonly: ''}
+app.get('/insertform', (req, res) => 
+  res.render('form', {
+    title: 'Add a book', 
+    header: 'Book data', 
+    action: '/insert', 
+    bookID: {value: '', readonly: ''},
+    name: {value: '', readonly: ''},
+    author: {value: '', readonly: ''},
+    type: {value: '', readonly: ''},
+    year: {value: '', readonly: ''}
   })
 );
 
@@ -113,7 +114,7 @@ app.post('/updatedata', async (req, res) => {
       res.render('form', {
         title: 'Update a book', 
         header: 'Book data', 
-        action: '/updatedata', 
+        action: '/update', 
         bookID: {value: data.bookID, readonly: 'readonly'},
         name: {value: data.name, readonly: ''},
         author: {value: data.author, readonly: ''},
