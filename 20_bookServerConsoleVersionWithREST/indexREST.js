@@ -10,7 +10,7 @@ const db = new DataStorage();
 const {CODES, MESSAGES} = require('./statusCodes');
 
 const {port, host, resource, idKey} = require('./configREST.json');
-const server = http.createServer();
+const server = http.createServer(app);
 
 app.use(cors());
 app.use(express.json());
