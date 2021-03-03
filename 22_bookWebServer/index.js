@@ -21,7 +21,7 @@ app.get('/', (req, res) => res.render('menu')); // If want to make manu.ejs gene
 app.get('/all', async (req, res) => {
   try {
     const result = await fetch('http://localhost:4000/books', {mode: 'cors'});
-    const data = await res.json();
+    const data = await result.json();
     res.render('allpage', {data});
    } 
   catch (err) {
