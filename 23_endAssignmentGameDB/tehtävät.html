@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<!-- saved from url=(0078)file:///home/koodi/Downloads/Ikonen_Vilma_game_3.3.2021_7_21_29_574%20(1).html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>tehtävät</title>
+  <style>
+    
+ #valikko button {
+   width: 20em;
+ }
+
+ section > h2, main>h1 {
+   background-color: beige;
+ }
+
+ @media print {
+    #valikko,
+    #syote,
+    #haku,
+    #kaikki,
+    #virhe {
+      page-break-inside: avoid;
+      page-break-after: always;
+      padding: 10px;
+      height: 420px;
+      border: solid grey 1px;
+    }
+
+    #kaikki {
+      height: 1000px;
+    }
+
+    body {
+      font-size: 10pt;
+    }
+    section {
+      page-break-after: always;
+    }
+    section > div:last-of-type{
+      page-break-after:avoid;
+    }
+ }
+
+ @media screen {
+   #valikko,
+   #syote,
+   #haku,
+   #kaikki,
+   #virhe {
+     page-break-inside: avoid;
+     border: solid gray 1px;
+     padding: 1em;
+     margin: 10px;
+     height: 600px;
+   }
+
+   body {
+     font-size: 12pt;
+   }
+ }
+
+
+ ul.taulu {
+   font-family: monospace;
+   font-weight: bold;
+ }
+
+ input {
+   display: inline-block;
+   height: 20px;
+   border: black solid 2px;
+ }
+
+ label {
+   display: inline-block;
+   width: 150px;
+ }
+
+ .lihavointi {
+   font-weight: bold;
+ }
+
+ div {
+   padding: 10px;
+ }
+
+ .iso {
+   font-size: 16pt;
+ }
+
+ h2 .iso {
+   font-size: 24pt;
+ }
+
+ th,
+ td {
+   padding: 10px;
+   text-align: left;
+ }
+
+ .huom {
+   padding: 1em;
+   border: dashed 1px red;
+ }
+
+ .konsolivalikko>ol>li {
+   margin-left:1em;
+   font-family: monospace;
+ }
+
+ pre, .konsolivalikko>ol {
+   width: 70%;
+   padding: 1em;
+   background-color: lightgray;
+   font-weight: bold;
+ }
+
+ .avain {
+   color:blue;
+   font-weight: bold;
+ }
+
+ .arvo{
+   color:red;
+ }
+
+ .olioalku, .olioloppu, .taulukko{
+   font-weight: bold;
+ }
+ .olio{
+   padding-left:1em;
+   padding-top:0;
+   padding-bottom: 0;
+ }
+
+ .rivi{
+   padding:0;
+ }
+
+ .arvo.varchar::before{
+    content: '\0022';
+ }
+ .arvo.varchar::after {
+   content: '\0022';
+ }
+
+ .jsondata {
+   font-family: monospace;
+ }
+
+ table.csvdata {
+   border-collapse: collapse;
+   border: solid 1px black;
+ }
+
+ table.csvdata th {
+   background-color: lightgrey;
+   border-bottom: 1px solid black;
+ }
+
+ table.csvdata td,
+ table.csvdata th {
+   border-right: 1px solid black;
+   border-left: 1px solid black;
+ }
+
+  .xmldata .elementti,
+  .xmldata .elementtiloppu {
+    padding-left: 1em;
+  }
+
+  .xmldata .kentta {
+    padding-left: 2em;
+  }
+  </style>
+</head>
+  <body>
+    <header>Vilma Ikonen</header>
+    <main>
+      <h1> Tasks</h1>
+      <ol>
+      
+          <li>Create a folder for the project</li> 
+      
+          <li>Write create statements for the database</li> 
+      
+          <li>Create the database</li> 
+      
+          <li>Create data access layer for the database</li> 
+      
+          <li>Create REST server (indexREST.js)</li> 
+      
+          <li>Create server (index.js)</li> 
+      
+          <li>Create webpages</li> 
+      
+          <li>Submit the project</li> 
+      
+          <li>Appendix: Example web pages</li> 
+      
+      </ol>
+      
+      
+        <section class="projektinAlustusEN">
+          <h2>1 Create a folder for the project</h2>
+        
+          <div>
+     Create a folder for the project. Name the folder with
+     <strong>Ikonen_Vilma_game_project</strong>.
+  </div>
+  <div>
+    
+     Generate or write the <strong>package.json</strong> file for the project.
+    
+  </div>
+  
+  <div>
+    Install <strong>mariadb</strong> library into the project folder.
+  </div>
+  
+  
+  <div>
+    Install all necessary libraries to the project.
+  </div>
+  
+        </section>
+      
+        <section class="luontilauseetSqlEN">
+          <h2>2 Write create statements for the database</h2>
+        
+          <div>
+    Write create statements to create a database called
+    <strong><span class="iso">gamedb</span></strong>.
+  </div>
+  <div>Create a table <strong>game</strong>, for
+    game data. Table columns are:
+  </div>
+  <ul class="taulu">
+    
+    <li>
+      number
+      integer
+    </li>
+    
+    <li>
+      name
+      varchar(53)
+    </li>
+    
+    <li>
+      quantity
+      integer
+    </li>
+    
+    <li>
+      genre
+      varchar(23)
+    </li>
+    
+    <li>
+      rating
+      varchar(9)
+    </li>
+    
+  </ul>
+  <div>
+     All columns are mandatory. The primary key is <strong>number</strong>.
+  </div>
+  <div>
+    Add two insert statements into the create statements for testing.
+  </div>
+  <div>
+    Create user <strong> noah@localhost
+    </strong> with password <strong> LQiM5bcS</strong>.
+    Grant all necessary privileges to the user.
+  </div>
+  
+  <div class="huom">
+    
+    <div>
+      Save all necessary create statements
+      
+      
+      
+      into a sql file
+      <strong>Ikonen_Vilma_game_createStatements.sql</strong>
+      
+    </div>
+    
+  </div>
+        </section>
+      
+        <section class="luoTietokantaEN">
+          <h2>3 Create the database</h2>
+        
+            <div>
+      Create the database with the create statements
+      .
+    </div> 
+        </section>
+      
+        <section class="tietovarastokerrosEN">
+          <h2>4 Create data access layer for the database</h2>
+        
+          <div>Create a datastorage layer with all necessary methods.</div>
+  <h3>Necessary operations:</h3>
+  <div>Your data access layer should have the following operations:
+    <ul class="operaatiot">
+    
+    <li><strong class="iso">get all</strong></li>
+    
+     
+    <li><strong class="iso">get one</strong></li>
+    
+    
+     
+    <li><strong class="iso">insert</strong></li>
+    
+     
+    <li><strong class="iso">update</strong></li>
+    
+     
+    <li><strong class="iso">remove</strong></li>
+    
+    </ul>
+  </div>
+  
+        </section>
+      
+        <section class="restpalvelinEN">
+          <h2>5 Create REST server (indexREST.js)</h2>
+        
+        <div>
+  Create a REST server. 
+  
+    Server is listening host <strong>localhost:4000</strong>.
+   
+  
+  Allow cross-origin requests (Cross-Origin Resource Sharing).
+  
+</div>
+<h3>REST API</h3>
+<div>
+  Create <strong>REST</strong> API. The resouces of the REST API
+  are given and returned in <strong>json</strong> format.
+  The API should include following:
+</div>
+
+<div>
+  <h3>Get all </h3>
+
+  <strong>GET</strong> /api/games
+</div>
+
+
+<div>
+  <h3> Get game</h3>
+  <strong>GET</strong> /api/games/number
+  <h4>Example:</h4>
+  <strong>GET</strong> /api/games/1
+</div>
+
+
+<div>
+  <h3> Delete game</h3>
+  <strong>DELETE</strong> /api/games/number
+</div>
+
+
+<div>
+  <h3>Update</h3>
+  <strong>PUT</strong> /api/games/number
+  
+    <p>Note: if the resource with the given number doesn't exist, it may be created</p>
+  
+</div>
+
+
+<div>
+  <h3>Insert game data</h3>
+  <strong>POST</strong> /api/games
+</div>
+
+
+        </section>
+      
+        <section class="verkkopalvelinEN">
+          <h2>6 Create server (index.js)</h2>
+        
+        <div>
+  Create a server.
+  
+  Server is listening host <strong>localhost:3000</strong>.
+  
+  Main menu can be opened from root route <strong class="iso">/</strong>.
+  Menu should include links to other pages.
+</div>
+        </section>
+      
+        <section class="verkkosivutEN">
+          <h2>7 Create webpages</h2>
+        
+        <div>Create webpages for the following operations:</div>
+<ul class="operaatiot">
+  
+  
+  <li><strong class="iso">get all</strong></li>
+  
+  
+  <li><strong class="iso">get one</strong></li>
+  
+  
+  <li><strong class="iso">insert</strong></li>
+  
+  
+  <li><strong class="iso">update</strong></li>
+  
+  
+  <li><strong class="iso">remove</strong></li>
+  
+  
+</ul>
+<p>
+  
+  Below (Appendix) are a few examples of web pages. Design and implement the main
+  menu and all other necessary pages.
+  </p>
+<p>
+  Design and implement stylesheets for your application.
+</p>
+<p>
+  
+</p>
+        </section>
+      
+        <section class="palautusEN">
+          <h2>8 Submit the project</h2>
+        
+          <div>
+    Submit your project folder
+    <strong>Ikonen_Vilma_game_project</strong>
+    acording to instructions given separately.
+     
+    Remove the <strong>node_modules</strong> folder before submitting.
+    
+    
+    The project folder should include <strong>package.json</strong> file
+    
+  </div>
+  
+  <div>
+     The project folder should also include the create statements
+    
+    
+    
+    in a sql file named as
+    <strong>Ikonen_Vilma_game_createStatements.sql</strong>
+    
+  </div>
+  
+  
+  
+
+  
+
+  
+        </section>
+      
+        <section class="fullstack_liite">
+          <h2>9 Appendix: Example web pages</h2>
+        
+        <div id="nakymat">
+  <h3>Menu</h3>
+  <div id="valikko">
+    <h1>Menu</h1>
+  
+    <p><button type="button">Get all</button></p>
+  
+    <p><button type="button">Get game</button></p>
+    
+    <p><button type="button">Insert game</button></p>
+    
+    <p><button type="button">Update game </button></p>
+    
+    <p><button type="button">Delete game</button></p>
+    
+ 
+  </div>
+  
+  <h3>Get all</h3>
+  <div id="kaikki">
+    <div id="haekaikki">
+  <h1>Get all</h1>
+  <table>
+    <thead>
+      <tr>
+        
+          <th>
+            number
+          </th>
+          
+          <th>
+            name
+          </th>
+          
+          <th>
+            quantity
+          </th>
+          
+          <th>
+            genre
+          </th>
+          
+          <th>
+            rating
+          </th>
+          
+      </tr>
+    </thead>
+    
+    
+      <tbody><tr>
+        
+          <td>
+            5
+          </td>
+          
+          <td>
+            Future 2525
+          </td>
+          
+          <td>
+            10
+          </td>
+          
+          <td>
+            FPS
+          </td>
+          
+          <td>
+            **
+          </td>
+          
+      </tr>
+      
+      <tr>
+        
+          <td>
+            1
+          </td>
+          
+          <td>
+            Jigsaw puzzle
+          </td>
+          
+          <td>
+            13
+          </td>
+          
+          <td>
+            platformer
+          </td>
+          
+          <td>
+            ***
+          </td>
+          
+      </tr>
+      
+      <tr>
+        
+          <td>
+            6
+          </td>
+          
+          <td>
+            Star Adventure
+          </td>
+          
+          <td>
+            15
+          </td>
+          
+          <td>
+            board game
+          </td>
+          
+          <td>
+            *****
+          </td>
+          
+      </tr>
+      
+      <tr>
+        
+          <td>
+            3
+          </td>
+          
+          <td>
+            Ladybirds
+          </td>
+          
+          <td>
+            7
+          </td>
+          
+          <td>
+            strategy
+          </td>
+          
+          <td>
+            **
+          </td>
+          
+      </tr>
+      
+      <tr>
+        
+          <td>
+            2
+          </td>
+          
+          <td>
+            Amnesia 2030
+          </td>
+          
+          <td>
+            30
+          </td>
+          
+          <td>
+            adventure
+          </td>
+          
+          <td>
+            *
+          </td>
+          
+      </tr>
+      
+      <tr>
+        
+          <td>
+            7
+          </td>
+          
+          <td>
+            U.F.O
+          </td>
+          
+          <td>
+            20
+          </td>
+          
+          <td>
+            brain-twister
+          </td>
+          
+          <td>
+            ****
+          </td>
+          
+      </tr>
+      
+      <tr>
+        
+          <td>
+            4
+          </td>
+          
+          <td>
+            The Rise and Fall of an Empire 22
+          </td>
+          
+          <td>
+            100
+          </td>
+          
+          <td>
+            brain-teaser
+          </td>
+          
+          <td>
+            *
+          </td>
+          
+      </tr>
+      
+        </tbody>
+  </table>
+</div>
+  </div>
+  
+    <h3>Get game</h3>
+    <div id="haku">
+        <div id="haeyksi">
+    <h1>Query result</h1>
+    
+    <p>number: 5</p>
+    
+    <p>name: Future 2525</p>
+    
+    <p>quantity: 10</p>
+    
+    <p>genre: FPS</p>
+    
+    <p>rating: **</p>
+    
+  </div>
+    </div>
+  
+  <h3>Add game</h3>
+  <div id="syote">
+    <div id="syottolomake">
+  <h1>Add a game</h1>
+  <form id="lomake" action="file:///home/koodi/Downloads/Ikonen_Vilma_game_3.3.2021_7_21_29_574%20(1).html#" method="post">
+    
+      <p>
+        <label>number</label>
+        <input type="text" size="1">
+      </p>
+    
+      <p>
+        <label>name</label>
+        <input type="text" size="53">
+      </p>
+    
+      <p>
+        <label>quantity</label>
+        <input type="text" size="4">
+      </p>
+    
+      <p>
+        <label>genre</label>
+        <input type="text" size="23">
+      </p>
+    
+      <p>
+        <label>rating</label>
+        <input type="text" size="9">
+      </p>
+    
+    <button type="submit">Submit</button>
+  </form>
+</div>
+  </div>
+
+ 
+ <h3>Error page</h3>
+ <div id="virhe">
+       <h1>Error</h1>
+    <p>Error message here</p>
+ </div>
+ 
+</div>
+        </section>
+        
+    </main> 
+  
+
+</body></html>
