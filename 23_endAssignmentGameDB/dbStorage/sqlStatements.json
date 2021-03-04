@@ -1,0 +1,8 @@
+{
+  "getAll": ["SELECT number, name, quantity, genre, rating FROM game"],
+  "get": ["SELECT number, name, quantity, genre, rating FROM game WHERE number=?"],
+  "insert": ["INSERT INTO game (number, name, quantity, genre, rating) VALUES (?, ?, ?, ?, ?)"],
+  "update": ["UPDATE game SET name=?, quantity=?, genre=?, rating=? WHERE number=?"],
+  "remove": ["DELETE FROM game WHERE number=?"],
+  "primaryKey":"number"
+}

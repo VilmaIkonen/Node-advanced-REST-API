@@ -11,7 +11,7 @@ CREATE TABLE gamedb.game(
 
 DROP user IF EXISTS 'wilma'@'localhost';
 CREATE user 'wilma'@'localhost' identified BY 'verysecretpassword';
-GRANT all privileges ON gamedb TO 'wilma'@'localhost';
+GRANT all privileges ON gamedb.* TO 'wilma'@'localhost';
 
 INSERT INTO gamedb.game VALUES(1, 'Jigsaw puzzle', 13, 'FPS', '**');
 INSERT INTO gamedb.game VALUES(2, 'Amnesia2030', 30, 'adventure', '*');
