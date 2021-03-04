@@ -48,7 +48,7 @@ app.post(`/${resource}`, async (req, res) => {
   try {
     const status = await db.get(req.body[idKey]);
     if(status.code && status.code === CODES.NOT_FOUND) {
-      res.json(await db.insert(resource));      
+      res.json(await db.insert(req.body));      
     }
     else {
       res.json(MESSAGES.NOT_INSERTED())
