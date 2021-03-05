@@ -7,7 +7,8 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const fetch = require('node-fetch');
-const {port, host} = require('./config.json');
+const {port, host} = require('./configWeb.json');
+const {resource} = require('../config.json');
 const server = http.createServer(app);
 
 app.set('view engine', 'ejs');
@@ -20,7 +21,7 @@ app.get('/', (req, res) => res.render('homepage'));
 
 app.get('/all', async (req, res) => {
   try {
-    const result = await fetch('http://localhost:4000/api/games', {mode: 'cors'});
+    const result = await fetch(`http://localhost:4000/api/${resource}`, {mode: 'cors'});
     const data = await result.json();
     res.render('allpage', {data});
    } 
@@ -34,7 +35,7 @@ app.route('/getone')
 .post(async(req, res) => {
   try {
     const number = req.body.number;
-    const result = await fetch(`http://localhost:4000/api/games/${number}`, {mode: 'cors'});
+    const result = await fetch(`http://localhost:4000/api/${resource}/${number}`, {mode: 'cors'});
     const data = await result.json();
     res.render('gamepage', {data})
   } 
@@ -43,6 +44,8 @@ app.route('/getone')
   }
 });
 
+// INSERT:
+// Get form for inserting
 app.get('/insert', (req, res) => 
   res.render('formpage', {
     title: 'Add a game', 
@@ -55,7 +58,7 @@ app.get('/insert', (req, res) =>
     rating: {value: '', readonly: ''}
   })
 );
-
+// post form data to db
 app.post('/insert', async (req, res) => {
   try {
     const options = {
@@ -65,7 +68,7 @@ app.post('/insert', async (req, res) => {
       headers: {'Content-Type': 'application/json'}
     };
 
-    const result = await fetch('http://localhost:4000/api/games', options);
+    const result = await fetch(`http://localhost:4000/api/${resource}`, options);
     const data = await result.json();
     res.render('statuspage', {status: data})
   } 
@@ -74,62 +77,66 @@ app.post('/insert', async (req, res) => {
   }
 });
 
-// app.get('/updateform', (req, res) => 
-//   res.render('form', {
-//     title: 'Update a book', 
-//     header: 'Book data', 
-//     action: '/updatedata', 
-//     bookID: {value: '', readonly: ''},
-//     name: {value: '', readonly: 'readonly'},
-//     author: {value: '', readonly: 'readonly'},
-//     type: {value: '', readonly: 'readonly'},
-//     year: {value: '', readonly: 'readonly'}
-//   })
-// );
+// UPDATE:
+// get form for finding db entry for updating
+app.get('/update', (req, res) => 
+  res.render('formpage', {
+    title: 'Update game data', 
+    header: 'Update game data', 
+    action: '/updatedata', 
+    number: {value: '', readonly: ''},
+    name: {value: '', readonly: 'readonly'},
+    quantity: {value: '', readonly: 'readonly'},
+    genre: {value: '', readonly: 'readonly'},
+    rating: {value: '', readonly: 'readonly'}
+  })
+);
 
-// app.post('/updatedata', async (req, res) => {
-//   try {
-//     const bookID = req.body.bookID;
-//     const result = await fetch(`http://localhost:4000/books/${bookID}`, {mode: 'cors'});
-//     const data = await result.json();
-//     if(data.message) {
-//       res.render('statuspage', {status: data}) // this if is needed because CODES/MESSAGES have 'type' and also the book db has filed 'type'
-//     } 
-//     else {
-//       res.render('form', {
-//         title: 'Update a book', 
-//         header: 'Book data', 
-//         action: '/update', 
-//         bookID: {value: data.bookID, readonly: 'readonly'},
-//         name: {value: data.name, readonly: ''},
-//         author: {value: data.author, readonly: ''},
-//         type: {value: data.type, readonly: ''},
-//         year: {value: data.year, readonly: ''}
-//       }) 
-//     }   
-//   } 
-//   catch (err) {
-//     fetchError(res);
-//   }
-// });
+// form for updating the data
+app.post('/updatedata', async (req, res) => {
+  try {
+    const number = req.body.number;
+    const result = await fetch(`http://localhost:4000/api/${resource}/${number}`, {mode: 'cors'});
+    const data = await result.json();
+    if(data.message) {
+      res.render('statuspage', {status: data}) // this if is needed because CODES/MESSAGES have 'type' and also the book db has filed 'type'
+    } 
+    else {
+      res.render('formpage', {
+        title: 'Update game data', 
+        header: 'Update game data', 
+        action: '/update', 
+        number: {value: data.number, readonly: 'readonly'},
+        name: {value: data.name, readonly: ''},
+        quantity: {value: data.quantity, readonly: ''},
+        genre: {value: data.genre, readonly: ''},
+        rating: {value: data.rating, readonly: ''}
+      }) 
+    }   
+  } 
+  catch (err) {
+    fetchError(res);
+  }
+});
 
-// app.post('/update', async (req, res) => {
-//   try {
-//     const options = {
-//       method: 'PUT', 
-//       body: JSON.stringify(req.body), 
-//       mode: 'cors', 
-//       headers: {'Content-Type': 'application/json'}
-//     };
+// post the updated data to db
+app.post('/update', async (req, res) => {
+  try {
+    const options = {
+      method: 'PUT', 
+      body: JSON.stringify(req.body), 
+      mode: 'cors', 
+      headers: {'Content-Type': 'application/json'}
+    };
 
-//     const result = await fetch(`http://localhost:4000/books/${req.body.bookID}`, options);
-//     const data = await result.json();
-//     res.render('statuspage', {status: data})
-//   } 
-//   catch (err) {
-//     fetchError(res);
-//   }
-// })
+    const result = await fetch(`http://localhost:4000/api/${resource}/${req.body.number}`, options);
+    const data = await result.json();
+    res.render('statuspage', {status: data})
+  } 
+  catch (err) {
+    fetchError(res);
+  }
+})
 
 // app.route('/remove')
 // .get((req, res) => res.render('getonepage', {title: 'Remove', header: 'Remove', action: '/remove'}))

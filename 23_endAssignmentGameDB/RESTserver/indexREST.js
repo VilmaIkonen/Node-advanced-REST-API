@@ -9,7 +9,8 @@ const DataStorage = require('../dbStorage/dataStorageLayer');
 const db = new DataStorage();
 const {CODES, MESSAGES} = require('../statusCodes');
 
-const {port, host, resource, idKey} = require('./configREST.json');
+const {port, host, idKey} = require('./configREST.json');
+const {resource} = require('../config.json');
 const server = http.createServer(app);
 
 app.use(cors());
