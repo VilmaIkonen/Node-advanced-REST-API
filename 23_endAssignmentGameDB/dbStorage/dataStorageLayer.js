@@ -85,8 +85,8 @@ module.exports = class Datastorage {
   remove(number) {
     return new Promise(async (resolve, reject) => {
       try {
-        const result = this.db.doQuery(removeSql, [+number]);
-        if(result.queryResult.rowChanged === 1) {
+        const result = await this.db.doQuery(removeSql, [+number]);
+        if(result.queryResult.rowsChanged === 1) {
           resolve(MESSAGES.DELETE_OK(PRIMARY_KEY, number));
         }
         else {
