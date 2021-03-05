@@ -4,8 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Status</title>
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css">
 </head>
 <body>
-  <div>ERROR</div>  
+  <main>
+    <div class="<%= status.type %>">
+      <% if(status.type == 'error') { %> 
+        <h1>Error</h1>
+      <% } else { %>
+        <h1>Status</h1>
+      <% } %>
+      <p><%= status.message %></p>
+    </div>
+    <a href="/"><button>Menu</button></a>
+  </main>
 </body>
 </html>

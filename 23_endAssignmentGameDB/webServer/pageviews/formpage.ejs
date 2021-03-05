@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/styles/styles.css" type="text/css">
+</head>
+<body>
+  <main>
+    <h1><%= header %></h1>
+    <form action="<%= action %>" method="POST">
+    <div>
+      <p>
+        <label>Game no. <input type="text" name="number" size="5" value="<%=number.value %>" <%=number.readonly %>></label>
+      </p>
+      <p>
+        <label>Name: <input type="text" name="name" size="100" value="<%= name.value %>" <%=name.readonly %>></label>
+      </p>
+      <p>
+        <label>Quantity in stock: <input type="text" name="quantity" size="5" value="<%=quantity.value %>" <%=quantity.readonly %>></label>
+      </p>
+      <p>
+        <label>Genre: <input type="text" name="genre" size="20" value="<%=genre.value %>" <%=genre.readonly %>></label>
+      </p>
+      <p>
+        <label>Rating: <input type="text" name="rating" size="5" value="<%=rating.value %>" <%=rating.readonly %>></label>
+      </p>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  <a href="/"><button>Back to homepage</button></a>
+  </main>
+</body>
+</html>

@@ -43,51 +43,36 @@ app.route('/getone')
   }
 });
 
-// app.route('/remove')
-// .get((req, res) => res.render('getonepage', {title: 'Remove', header: 'Remove', action: '/remove'}))
-// .post(async(req, res) => {
-//   try {
-//     const bookID = req.body.bookID;
-//     const options = {method: 'DELETE', mode: 'cors'}; // no body/payload needed here as it oes through uri
-//     const result = await fetch(`http://localhost:4000/books/${bookID}`, options);
-//     const data = await result.json();
-//     res.render('statuspage', {status: data})
-//   } 
-//   catch (err) {
-//     fetchError(res);
-//   }
-// });
+app.get('/insert', (req, res) => 
+  res.render('formpage', {
+    title: 'Add a game', 
+    header: 'Game data', 
+    action: '/insert', 
+    number: {value: '', readonly: ''},
+    name: {value: '', readonly: ''},
+    quantity: {value: '', readonly: ''},
+    genre: {value: '', readonly: ''},
+    rating: {value: '', readonly: ''}
+  })
+);
 
-// app.get('/insertform', (req, res) => 
-//   res.render('form', {
-//     title: 'Add a book', 
-//     header: 'Book data', 
-//     action: '/insert', 
-//     bookID: {value: '', readonly: ''},
-//     name: {value: '', readonly: ''},
-//     author: {value: '', readonly: ''},
-//     type: {value: '', readonly: ''},
-//     year: {value: '', readonly: ''}
-//   })
-// );
+app.post('/insert', async (req, res) => {
+  try {
+    const options = {
+      method: 'POST', 
+      body: JSON.stringify(req.body), 
+      mode: 'cors', 
+      headers: {'Content-Type': 'application/json'}
+    };
 
-// app.post('/insert', async (req, res) => {
-//   try {
-//     const options = {
-//       method: 'POST', 
-//       body: JSON.stringify(req.body), 
-//       mode: 'cors', 
-//       headers: {'Content-Type': 'application/json'}
-//     };
-
-//     const result = await fetch('http://localhost:4000/books', options);
-//     const data = await result.json();
-//     res.render('statuspage', {status: data})
-//   } 
-//   catch (err) {
-//     fetchError(res);
-//   }
-// });
+    const result = await fetch('http://localhost:4000/api/games', options);
+    const data = await result.json();
+    res.render('statuspage', {status: data})
+  } 
+  catch (err) {
+    fetchError(res);
+  }
+});
 
 // app.get('/updateform', (req, res) => 
 //   res.render('form', {
@@ -145,6 +130,21 @@ app.route('/getone')
 //     fetchError(res);
 //   }
 // })
+
+// app.route('/remove')
+// .get((req, res) => res.render('getonepage', {title: 'Remove', header: 'Remove', action: '/remove'}))
+// .post(async(req, res) => {
+//   try {
+//     const bookID = req.body.bookID;
+//     const options = {method: 'DELETE', mode: 'cors'}; // no body/payload needed here as it oes through uri
+//     const result = await fetch(`http://localhost:4000/books/${bookID}`, options);
+//     const data = await result.json();
+//     res.render('statuspage', {status: data})
+//   } 
+//   catch (err) {
+//     fetchError(res);
+//   }
+// });
 
 server.listen(port, host, () => console.log(`Server running on ${host}: ${port}`))
 
