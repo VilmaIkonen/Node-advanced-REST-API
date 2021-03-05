@@ -9,7 +9,7 @@
 <body>
   <main>
     <h1><%= header %></h1>
-    <form action="<%= action %>" method="POST"></form>
+    <form action="<%= action %>" method="POST">
     <div>
       <p>
         <label>BookID: <input type="text" name="bookID" size="5" value="<%=bookID.value %>" <%=bookID.readonly %>></label>
@@ -28,6 +28,7 @@
       </p>
     </div>
     <button type="submit">Submit</button>
+  </form>
     <a href="/"><button>Menu</button></a>
   </main>
 </body>
