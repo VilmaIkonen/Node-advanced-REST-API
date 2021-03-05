@@ -1,0 +1,6 @@
+{
+  "port": 4000,
+  "host": "localhost",
+  "resource": "games",
+  "idKey": "number"
+}
