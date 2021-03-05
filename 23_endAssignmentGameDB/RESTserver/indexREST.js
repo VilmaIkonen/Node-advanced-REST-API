@@ -17,20 +17,21 @@ app.use(express.json());
 
 // ROUTES:
 // Get all:
-app.get(`/${resource}`, (req, res) => {
+app.get(`/api/${resource}`, (req, res) => {
   db.getAll()
     .then(result => res.json(result))
     .catch(err => res.json(err))
 });
 
 // Delete&update (both operations use same route resource + value=number)
-app.route(`/${resource}/:value`)
+app.route(`/api/${resource}/:value`)
   .get((req, res) => db.get(req.params.value)
     .then(result => res.json(result))
     .catch(err => res.json(err)))
   .delete((req, res) => db.remove(req.params.value)
     .then(result => res.json(result))
     .catch(err => res.json(err)))
+  // put= sort of a "post" for update
   .put((req, res) => {
     if(!req.body) {
       return res.sendStatus(400); // if body/payload missing, send error statuscode
@@ -46,8 +47,8 @@ app.route(`/${resource}/:value`)
   }
 )
 
-// post route for update and insert
-app.post(`/${resource}`, async (req, res) => {
+// post route for insert
+app.post(`/api/${resource}`, async (req, res) => {
   if(!req.body) {
     return res.sendStatus(400);
   }
