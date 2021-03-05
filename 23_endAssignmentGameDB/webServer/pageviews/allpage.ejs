@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games</title>
+</head>
+<body>
+  <main>
+    <h1>Games</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Game no.</th>
+          <th>Name</th>
+          <th>Quantity in stock</th>
+          <th>Genre</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(game => { %>
+          <tr>
+            <td><%= game.number%></td>
+            <td><%= game.name %></td>
+            <td><%= game.quantity %></td>
+            <td><%= game.genre %></td>
+            <td><%= game.rating %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <a href="/"><button>Back to homepage</button></a>
+  </main>
+</body>
+</html>
