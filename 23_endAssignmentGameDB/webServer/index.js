@@ -29,22 +29,22 @@ app.get('/all', async (req, res) => {
   }
 });
 
-// app.route('/getone')
-// .get((req, res) => res.render('getform', {title: 'Get', header: 'Get', action: '/getone'}))
-// .post(async(req, res) => {
-//   try {
-//     const bookID = req.body.bookID;
-//     const result = await fetch(`http://localhost:4000/books/${bookID}`, {mode: 'cors'});
-//     const data = await result.json();
-//     res.render('bookpage', {data})
-//   } 
-//   catch (err) {
-//     fetchError(res);
-//   }
-// });
+app.route('/getone')
+.get((req, res) => res.render('getonepage', {title: 'Get', header: 'Get a game', action: '/getone'}))
+.post(async(req, res) => {
+  try {
+    const number = req.body.number;
+    const result = await fetch(`http://localhost:4000/api/games/${number}`, {mode: 'cors'});
+    const data = await result.json();
+    res.render('gamepage', {data})
+  } 
+  catch (err) {
+    fetchError(res);
+  }
+});
 
 // app.route('/remove')
-// .get((req, res) => res.render('getform', {title: 'Remove', header: 'Remove', action: '/remove'}))
+// .get((req, res) => res.render('getonepage', {title: 'Remove', header: 'Remove', action: '/remove'}))
 // .post(async(req, res) => {
 //   try {
 //     const bookID = req.body.bookID;
