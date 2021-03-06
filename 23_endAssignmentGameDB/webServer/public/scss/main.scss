@@ -1,7 +1,87 @@
-h1 {
-	color: teal;
-}
+@import 'variables';
 
-input[readonly] {
-	background-color: lightgray;
+/* COMMON STYLES START */
+.container {
+	background: url(https://source.unsplash.com/1LWiYun3Rm0/1000x1000) no-repeat
+		center center/cover;
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	margin: 0 auto;
+	padding: 2rem;
 }
+h1,
+h2 {
+	font-family: $font2;
+	font-weight: bold;
+	color: $color1;
+}
+h1 {
+	font-size: 4rem;
+	margin-top: 2rem;
+}
+h2 {
+	font-size: 3rem;
+}
+h3,
+p {
+	font-family: $font1;
+	font-size: 1.5rem;
+}
+input {
+	font-family: $font1;
+	font-size: 1.2rem;
+}
+label {
+	@extend input;
+	font-weight: bold;
+}
+.btn {
+	width: 150px;
+	padding: 0.5rem 1rem;
+	margin: 0.5rem;
+	border-radius: 5%;
+	font-family: $font1;
+	color: $color1;
+	font-weight: bolder;
+	font-size: 1rem;
+	background-color: $color2;
+	&:hover {
+		background: darken($color2, 30%);
+	}
+}
+.attributes {
+	font-family: $font2;
+	color: $color2;
+	font-size: 1rem;
+	a {
+		text-decoration: none;
+		color: $color1;
+		:hover {
+			color: $color3;
+		}
+	}
+}
+/* COMMON STYLES END*/
+
+/* ALLPAGE START */
+table {
+	margin: 3rem auto;
+	color: $color2;
+	background-color: $color1;
+	opacity: 70%;
+	font-family: $font1;
+	font-size: 1.5rem;
+	border-radius: 2%;
+	th,
+	td {
+		padding: 0.5rem 1rem;
+	}
+}
+/* ALLPAGE END */
+
+/* FORMPAGE START */
+input[readonly] {
+	background-color: rgb(170, 170, 170);
+}
+/* FORMPAGE END */

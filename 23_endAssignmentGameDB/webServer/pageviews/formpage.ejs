@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
   <link rel="stylesheet" href="/dist/css/main.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100;300&family=Comfortaa:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main>
+  <main class="container">
     <h1><%= header %></h1>
     <form action="<%= action %>" method="POST">
     <div>
@@ -15,7 +17,7 @@
         <label>Game no. <input type="text" name="number" size="5" value="<%=number.value %>" <%=number.readonly %>></label>
       </p>
       <p>
-        <label>Name: <input type="text" name="name" size="100" value="<%= name.value %>" <%=name.readonly %>></label>
+        <label>Name: <input type="text" name="name" size="50" value="<%= name.value %>" <%=name.readonly %>></label>
       </p>
       <p>
         <label>Quantity in stock: <input type="text" name="quantity" size="5" value="<%=quantity.value %>" <%=quantity.readonly %>></label>
@@ -27,9 +29,9 @@
         <label>Rating: <input type="text" name="rating" size="5" value="<%=rating.value %>" <%=rating.readonly %>></label>
       </p>
     </div>
-    <button type="submit">Submit</button>
+    <button class="btn" type="submit">Submit</button>
   </form>
-  <a href="/"><button>Back to homepage</button></a>
+  <a href="/"><button class="btn">Back to homepage</button></a>
   </main>
 </body>
 </html>

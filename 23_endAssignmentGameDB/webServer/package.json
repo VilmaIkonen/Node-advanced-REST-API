@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "sass": "node-sass -w webServer/public/scss/ -o webServer/public/dist/css/ --recursive"
+    "sass": "node-sass -w public/scss/ -o public/dist/css/ --recursive"
   },
   "keywords": [],
   "author": "",

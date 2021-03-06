@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
   <link rel="stylesheet" href="/dist/css/main.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100;300&family=Comfortaa:wght@300;400&display=swap" rel="stylesheet">
   </head>
 <body>
-  <h1><%= header %></h1>
-  <form action="<%= action %>" method="POST">
-    <p>
-      <label for="bookID">Game no. <input type="text" name="number"></label>
-    </p>
-    <button type="submit">Submit</button>
-    <a href="/"><button>Back to homepage</button></a>
-  </form>
-  
+  <main class="container">
+    <h1><%= header %></h1>
+    <form action="<%= action %>" method="POST">
+      <p>
+        <label for="bookID">Game no. <input type="text" name="number"></label>
+      </p>
+      <button class="btn" type="submit">Submit</button>
+      <a href="/"><button class="btn">Back to homepage</button></a>
+    </form>  
+  </main>
 </body>
 </html>

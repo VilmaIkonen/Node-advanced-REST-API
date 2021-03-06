@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Game info</title>
   <link rel="stylesheet" href="/dist/css/main.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100;300&family=Comfortaa:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main>
-    <h1>Game info: </h1>
+  <main class="container">
+    <h2>Game info: </h2>
     <% if(data.message) {%>
       <p class="<%= data.type %>"><%= data.message %></p>
     <% } else { %>
@@ -18,7 +20,7 @@
     <p>Genre: <%= data.genre %> </p>
     <p>Rating: <%= data.rating %> </p>
     <% } %>
-    <a href="/"><button>Back to homepage</button></a>
+    <a href="/"><button class="btn">Back to homepage</button></a>
   </main>  
 </body>
 </html>
